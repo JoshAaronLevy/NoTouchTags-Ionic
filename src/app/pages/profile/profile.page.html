@@ -1,11 +1,19 @@
 <ion-content>
+  <ion-list>
+    <ion-item lines="full">
+      <ion-icon slot="start" name="moon"></ion-icon>
+      <ion-label>
+        Toggle Dark/Light Theme
+      </ion-label>
+      <ion-toggle id="themeToggle" slot="end" (click)="toggleColorScheme()"></ion-toggle>
+    </ion-item>
+  </ion-list>
   <div id="hero" style="background-image: url('/assets/img/sport2.jpg'); ">
     <div class="bio">
       <ion-avatar>
         <img src="/assets/img/post1.jpg">
       </ion-avatar>
       <h1>Alexia Morales</h1>
-      <p id="subtitle">347K followers</p>
     </div>
   </div>
   <div id="mosaic" class="ion-padding">

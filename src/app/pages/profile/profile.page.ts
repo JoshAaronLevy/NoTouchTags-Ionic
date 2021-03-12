@@ -9,7 +9,16 @@ export class ProfilePage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  toggleColorScheme() {
+    // Query for the toggle that is used to change between themes
+    const toggle = document.querySelector('#themeToggle');
+
+    // Listen for the toggle check/uncheck to toggle the dark class on the <body>
+    toggle.addEventListener('ionChange', (ev) => {
+      document.body.classList.toggle('dark', ev.detail.checked);
+    });
   }
 
 }
