@@ -1,0 +1,77 @@
+<ion-header class="ion-no-border ion-padding" translucent="true" mode="md">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-menu-button mode="md">
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="options"></ion-icon>
+      </ion-button>
+      <div class="numberCircle">3</div>
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [fullscreen]="true">
+
+  <ion-item lines="none" class="ion-margin-bottom ion-margin-top">
+    <h1 class="ion-no-padding ion-no-margin">Discover</h1>
+    <ion-button class="ion-no-margin" fill="clear" slot="end" color="dark" mode="ios">
+      <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
+      <strong>Filter by</strong>
+    </ion-button>
+  </ion-item>
+
+
+  <!-- Searchbar with cancel button always shown -->
+<ion-searchbar mode="ios"></ion-searchbar>
+  <ion-item lines="none" class="ion-margin-bottom ion-margin-top">
+    <h1 class="ion-no-padding ion-no-margin">Collection</h1>
+    <ion-button class="ion-no-margin" fill="clear" slot="end" color="dark" mode="ios">
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      <strong>Show more</strong>
+    </ion-button>
+  </ion-item>
+
+  <ion-grid>
+    <ion-row class="ion-no-padding ion-no-margin">
+      <ng-container *ngFor="let product of products">
+        <ion-col class="ion-no-padding ion-no-margin" size="6">
+          <ion-card class="product" routerLink="/product">
+            <ion-card-content>
+              <h2>{{product.name}}</h2>
+              <img [src]="product.image">
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ng-container>
+    </ion-row>
+  </ion-grid>
+
+  <ion-item lines="none">
+    <ion-button fill="clear" slot="start" color="dark">
+      <strong>Meet our heros</strong>
+    </ion-button>
+  </ion-item>
+
+  <div class="gallery">
+    <div class="scrolling-wrapper">
+      <div class="card" *ngFor="let item of gallery">
+        <div [ngStyle]="{'background-image': 'url(' + item.image + ')'}" class="image-container">
+          <div class="titles">
+            <h2>{{item.name}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</ion-content>

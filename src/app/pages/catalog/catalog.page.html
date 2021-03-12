@@ -1,0 +1,62 @@
+<ion-header class="ion-no-border ion-padding" translucent="true" mode="md">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-menu-button mode="md">
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="options"></ion-icon>
+      </ion-button>
+      <div class="numberCircle">3</div>
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-item lines="none">
+    <h1 class="ion-no-padding ion-no-margin">Catalog</h1>
+    <ion-button class="ion-no-margin" fill="clear" slot="end" color="dark" mode="ios"> 
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      <strong>Show more</strong>
+    </ion-button>
+  </ion-item>
+
+  <div class="gallery">
+    <div class="scrolling-wrapper">
+      <div class="card" *ngFor="let item of gallery">
+        <div [ngStyle]="{'background-image': 'url(' + item.image + ')'}" class="image-container">
+          <div class="titles">
+            <h2>{{item.name}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <ion-item class="ion-padding-top" lines="none">
+    <h1 class="ion-no-padding ion-no-margin">For you</h1>
+    <ion-button class="ion-no-margin" fill="clear" slot="end" color="dark" mode="ios">
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      <strong>Show all</strong>
+    </ion-button>
+  </ion-item>
+
+  <div class="posts">
+    <div class="scrolling-wrapper">
+      <div class="card" *ngFor="let item of posts">
+        <div [ngStyle]="{'background-image': 'url(' + item.image + ')'}" class="image-container">
+          <div class="titles">
+            <h2>{{item.name}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

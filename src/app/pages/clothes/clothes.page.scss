@@ -1,0 +1,49 @@
+ion-toolbar {
+    --background: var(--ion-color-medium);
+}
+
+ion-slides.gallery {
+    background: var(--ion-color-medium);
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.title {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+
+    h1 {
+        font-size: 34px;
+    }
+
+    h2 {
+        font-size: 28px;
+        font-weight: 500 !important;
+    }
+
+    img {
+        max-width: 50px;
+    }
+}
+
+.model-slide {
+    //background: var(--ion-color-medium);
+    margin: 10px;
+    max-width: 120px;
+    height: 60px;
+    border-radius: 10px;
+    margin: auto;
+    font-size: 24px;
+    font-family: "Montserrat";
+}
+
+ion-item.description{
+    font-size: 12px;
+    color: var(--ion-color-gray);
+    line-height: 18px;
+}
+
+ion-footer{
+    background: white;
+}

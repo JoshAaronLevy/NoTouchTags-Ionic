@@ -1,0 +1,19 @@
+.product{
+    --background: var(--ion-color-medium);
+    box-shadow: none;
+    border-radius: 25px;
+}
+
+.numberCircle{
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    padding: 7px;
+    background: #000;
+    color: #ffffff !important;
+    text-align: center;
+    font-weight: bold !important;
+    font-size: 12px;
+    margin-left: 12px;
+    font-family: "Montserrat", sans-serif !important;
+}

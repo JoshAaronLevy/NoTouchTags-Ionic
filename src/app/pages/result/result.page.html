@@ -1,0 +1,41 @@
+<ion-header class="ion-no-border ion-padding" translucent="true" mode="md">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-menu-button mode="md">
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="options"></ion-icon>
+      </ion-button>
+      <div class="numberCircle">3</div>
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-item lines="none">
+    <h1 class="ion-no-padding ion-no-margin">Shoes</h1>
+    <ion-button class="ion-no-margin" fill="clear" slot="end" color="dark"  mode="ios">
+      <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
+      <strong>Sort by</strong>
+    </ion-button>
+  </ion-item>
+
+  <ng-container *ngFor="let product of products">
+    <ion-card class="product" routerLink="/product">
+      <ion-card-content class="ion-text-center">
+        <img [src]="product.image">
+        <div class="ion-text-center">
+          <h2>{{product.name}}</h2>
+          <p>${{product.price}}</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+</ion-content>

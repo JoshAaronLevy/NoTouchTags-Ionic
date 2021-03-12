@@ -1,0 +1,60 @@
+<ion-header class="ion-no-border ion-padding" translucent="true" mode="md">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-menu-button mode="md">
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="options"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <ion-item lines="none" class="ion-margin-bottom">
+    <h1 class="ion-no-padding ion-no-margin">Checkout</h1>
+  </ion-item>
+
+  <ion-item lines="none" class="ion-margin-bottom" detail="true">
+    <ion-label>
+      <h2 class="ion-no-padding ion-no-margin">Melissa Park</h2>
+      <p>224 Avenue Park, 24423</p>
+      <p>London</p>
+      <p>United Kingdom</p>
+    </ion-label>
+  </ion-item>
+
+  <ion-item lines="none" detail="true">
+    <ion-thumbnail slot="start">
+      <img src="/assets/img/mastercard.svg">
+    </ion-thumbnail>
+    <ion-label>
+      <h2>Credit Card</h2>
+     <p>·····89</p>
+    </ion-label>
+  </ion-item>
+
+  <ion-item class="ion-margin-top" lines="none">
+    <p style="font-size: 12px; color: var(--ion-color-gray) !important;">Do you have a promotional code?</p>
+  </ion-item>
+
+</ion-content>
+
+<ion-footer class="ion-padding">
+
+  <ion-item class="ion-margin-bottom ion-padding-bottom ion-no-margin ion-no-padding" lines="none" detail="false">
+    <ion-label>
+      <h2 id="total">Total</h2>
+    </ion-label>
+    <ion-label class="ion-text-right ion-no-margin" slot="end">
+      <h2 id="price">$308</h2>
+    </ion-label>
+  </ion-item>
+  <ion-button fill="solid" size="large" color="dark" shape="round" expand="block">Place Order</ion-button>
+</ion-footer>

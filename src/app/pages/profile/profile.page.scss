@@ -1,0 +1,69 @@
+#hero {
+    height: 400px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    .bio {
+        padding-top: 160px;
+        text-align: center;
+        ion-avatar {
+            margin: auto;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
+        }
+
+        #subtitle {
+            color: white !important;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 28px;
+            margin-top: 0px;
+        }
+
+        h1 {
+            margin: 0px;
+            padding: 0px;
+            color: white;
+        }
+    }
+}
+
+#mosaic {
+    position: absolute;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    margin-top: -40px;
+    background-color: white;
+    width: 100%;
+    padding-top: 24px;
+
+    #left-img {
+        height: 316px;
+        border-top-left-radius: 40px;
+        border-bottom-left-radius: 40px;
+        background-size: cover;
+        background-position: center;
+        margin-right: 8px;
+    }
+
+    #top-right-img {
+        height: 150px;
+        border-top-right-radius: 40px;
+        margin-bottom: 8px;
+        background-size: cover;
+        background-position: center;
+        margin-left: 8px;
+    }
+
+    #bottom-right-img {
+        height: 150px;
+        border-bottom-right-radius: 40px;
+        margin-top: 8px;
+        background-size: cover;
+        background-position: center;
+        margin-left: 8px;
+    }
+}

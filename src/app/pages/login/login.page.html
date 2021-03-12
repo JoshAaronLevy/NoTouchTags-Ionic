@@ -1,0 +1,39 @@
+<ion-content class="ion-padding">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-right ion-padding">
+        <ion-button class="top-button ion-margin-top" size="medium" shape="round" color="dark">Login
+        </ion-button>
+      </ion-col>
+      <ion-col class="ion-text-left ion-padding">
+        <ion-button routerLink="/register" class="top-button ion-margin-top" size="medium" shape="round" fill="clear">
+          Register
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="ion-padding-end">
+    <ion-item class="ion-margin-top">
+      <ion-input mode="md" type="email" placeholder="Email"></ion-input>
+    </ion-item>
+
+    <ion-item class="ion-margin-top">
+      <ion-input mode="md" type="password" placeholder="Password"></ion-input>
+    </ion-item>
+  </div>
+
+  <div class="ion-text-center ion-margin-top ion-padding">
+    <ion-button class="ion-margin-top ion-margin-bottom" size="large" expand="block" shape="round" color="dark">
+      Login
+    </ion-button>
+    <ion-button (click)="AppleSignIn()" color="dark" size="large" expand="full" shape="round" class="apple-login">
+      <ion-icon expand="full" name="logo-apple" slot="start"></ion-icon>
+      Sign In with Apple
+    </ion-button>
+
+    <p routerLink="/forgot" class="ion-text-center ion-margin-top ion-padding">Forgot Password</p>
+  </div>
+
+</ion-content>

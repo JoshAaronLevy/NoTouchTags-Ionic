@@ -1,0 +1,16 @@
+<ion-content>
+<div class="ion-text-center ion-padding">
+    <h1>Theme Index</h1>
+</div>
+  <ion-grid>
+    <ion-row>
+      <ng-container *ngFor="let page of pages">
+        <ion-col routerLink="/{{page.name}}" class="ion-text-center" size="4">
+          <ion-card>
+            <p>{{page.name}}</p>
+          </ion-card>
+        </ion-col>
+      </ng-container>
+    </ion-row>
+  </ion-grid>
+</ion-content>

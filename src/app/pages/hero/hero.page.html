@@ -1,0 +1,37 @@
+<ion-content>
+  
+  <div class="hero ion-padding">
+    <div class="titles ion-padding">
+      <h1>Sales!</h1>
+      <h2>New Season</h2>
+    </div>
+  </div>
+
+  <div class="ion-padding ion-margin-top">
+
+    <ion-item lines="none">
+      <h1 class="ion-no-padding ion-no-margin">New Arrivals</h1>
+      <ion-button class="ion-no-margin" fill="clear" slot="end" color="dark" mode="ios">
+        <ion-icon slot="end" name="chevron-forward-outline" ></ion-icon>
+        <strong>Show all</strong>
+      </ion-button>
+    </ion-item>
+
+    <div class="products">
+      <div class="scrolling-wrapper">
+        <div class="card" *ngFor="let item of products">
+          <div [ngStyle]="{'background-image': 'url(' + item.image + ')'}" class="image-container">
+          </div>
+          <div class="titles">
+            <h2>{{item.name}}</h2>
+            <p>{{item.price}}$</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</ion-content>

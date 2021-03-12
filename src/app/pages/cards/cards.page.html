@@ -1,0 +1,74 @@
+<ion-header class="ion-no-border ion-padding" translucent="true" mode="md">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-menu-button mode="md">
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="options"></ion-icon>
+      </ion-button>
+      <div class="numberCircle">3</div>
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding ion-margin ion-text-center">
+
+  <ion-item lines="none" class="ion-no-padding ion-margin-bottom ion-padding-bottom">
+    <h1 class="ion-no-padding ion-no-margin">Payment Methods</h1>
+  </ion-item>
+
+  <ion-list>
+    <ion-item-sliding class="ion-no-padding ion-margin-bottom" *ngFor="let card of cards">
+      <ion-item class="ion-no-padding" lines="none">
+        <ion-grid class="ion-no-margin" [class.cardON]="card.state=='ON'" [class.cardOFF]="card.state=='OFF'">
+          <ion-row>
+            <ion-col size="6">
+            </ion-col>
+            <ion-col size="6" class="logo">
+              <ion-img class="brand" [src]="card.logo"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row class="digits">
+            <ion-col class="number">
+              {{card.a}}
+            </ion-col>
+            <ion-col class="number">
+              {{card.b}}
+            </ion-col>
+            <ion-col class="number">
+              {{card.c}}
+            </ion-col>
+            <ion-col class="number">
+              {{card.d}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="date">
+              Expires: {{card.expires}}
+            </ion-col>
+            <ion-col class="bank">
+              {{card.bank}}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item-options class="ion-padding" side="end">
+        <ion-item-option color="white" (click)="update(card)">
+          <ion-icon id="power" [color]="card.state=='ON' ? 'danger' : 'success'" name="power"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-item class="ion-margin-top ion-no-margin ion-no-padding" lines="none">
+    <p style="font-size: 12px; color: var(--ion-color-dark) !important;">Add another payment method</p>
+  </ion-item>
+
+
+</ion-content>

@@ -1,0 +1,58 @@
+<ion-content [fullscreen]="true">
+
+
+
+  <div class="ion-padding">
+
+    <h1 class="ion-text-center">Filter</h1>
+
+    <p class="ion-text-left"><strong>Gender</strong></p>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-text-center">
+
+          <ion-button expand="block" color="dark">
+            Male
+          </ion-button>
+        </ion-col>
+        <ion-col class="ion-text-center">
+
+          <ion-button expand="block" fill="outline" color="gray">
+            Woman
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <p class="ion-text-left"><strong>Price</strong></p>
+
+    <ion-item class="ion-no-padding" lines="none" mode="ios">
+      <ion-range color="dark" min="0" max="200" dualKnobs="true" pin="true" value="90">
+      </ion-range>
+    </ion-item>
+
+
+    <p class="ion-text-left ion-padding-bottom"><strong>Size</strong></p>
+
+    <ion-slides pager="false" [options]="slideOpts">
+      <ng-container *ngFor="let size of sizes">
+        <ion-slide class="size-slide ion-margin-bottom" [ngStyle]="{'background' : size.selected === true ? 'var(--ion-color-dark)' : 'var(--ion-color-medium)',
+        'color' : size.selected === true ? 'white' : 'var(--ion-color-dark)' }">
+          {{size.number}}
+        </ion-slide>
+      </ng-container>
+    </ion-slides>
+
+    <p class="ion-text-left ion-padding-top"><strong>Sex</strong></p>
+
+    <ion-list>
+      <ion-item *ngFor="let sex of sexs" lines="none">
+        <ion-label>{{sex.val}}</ion-label>
+        <ion-checkbox slot="start" mode="md" [(ngModel)]="sex.isChecked"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+
+  </div>
+
+</ion-content>

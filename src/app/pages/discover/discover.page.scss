@@ -1,0 +1,79 @@
+ion-searchbar {
+  --background: var(--ion-color-medium);
+}
+
+.gallery {
+  background: white;
+  .scrolling-wrapper {
+    margin-top: 16px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    .card {
+      flex: 0 0 auto;
+      border-radius: 20px;
+      position: relative;
+    }
+    img {
+      width: 155px;
+      padding: 15px;
+      border-radius: 20px;
+    }
+    .image-container {
+      border-radius: 20px;
+      background-repeat: none;
+      background-size: cover;
+      background-position: center;
+      height: 180px;
+      width: 180px;
+      margin-left: 20px;
+    }
+    .titles {
+      position: absolute;
+      bottom: 0;
+      margin-left: 20px;
+      margin-bottom: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+    h2 {
+      color: white;
+      font-size: 24px;
+    }
+  }
+}
+
+.product {
+  --background: var(--ion-color-medium);
+  box-shadow: none;
+  border-radius: 15px;
+  padding: 0px;
+  margin: 10px;
+  ion-card-content {
+    padding: 10px;
+  }
+  h2 {
+    font-size: 14px;
+  }
+
+  ion-button {
+    --padding-end: 16px;
+    --padding-start: 16px;
+    font-weight: 500 !important;
+  }
+}
+
+.numberCircle {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  padding: 7px;
+  background: #000;
+  color: #ffffff !important;
+  text-align: center;
+  font-weight: bold !important;
+  font-size: 12px;
+  margin-left: 12px;
+  font-family: "Montserrat", sans-serif !important;
+}

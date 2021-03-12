@@ -1,0 +1,94 @@
+.hero {
+
+  ion-toolbar{
+    --background: none;
+  }
+  height: 300px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right;
+  //background: var(--ion-color-medium);
+  background-image: url("/assets/img/model.jpg");
+  position: relative;
+
+  .titles {
+    position: absolute;
+    top: 20px;
+    left: 16px;
+
+    h1 {
+      font-size: 37px;
+      line-height: 40px;
+    }
+
+    h2 {
+      color: var(--ion-color-gray);
+      font-size: 16px !important;
+      font-weight: 400;
+      margin-top: 0px;
+    }
+  }
+}
+
+.gallery {
+  background: white;
+  .scrolling-wrapper {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    .card {
+      flex: 0 0 auto;
+      border-radius: 20px;
+      position: relative;
+    }
+    img {
+      width: 155px;
+      padding: 15px;
+      border-radius: 20px;
+    }
+    .image-container {
+      border-radius: 20px;
+      background-repeat: none;
+      background-size: cover;
+      background-position: center;
+      height: 180px;
+      width: 230px;
+      margin-left: 20px;
+    }
+    .titles {
+      position: absolute;
+      bottom: 0;
+      margin-left: 20px;
+      margin-bottom: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+    h2 {
+      color: white;
+      font-size: 24px;
+    }
+  }
+}
+
+.product {
+  --background: var(--ion-color-medium);
+  box-shadow: none;
+  border-radius: 15px;
+  padding: 0px;
+  margin: 10px;
+  ion-card-content {
+    padding: 10px;
+  }
+  h2 {
+    font-size: 14px;
+  }
+
+  ion-button {
+    --padding-end: 16px;
+    --padding-start: 16px;
+    font-weight: 500 !important;
+  }
+}
