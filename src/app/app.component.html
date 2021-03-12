@@ -17,8 +17,27 @@
           </h1>
         </ion-item>
       </ion-list>
-      <ion-button style="--box-shadow:none;" mode="ios" class="extra-padding ion-padding ion-margin-top" color="primary" size="large" expand="block">New Collection</ion-button>
+      <ion-button style="--box-shadow:none;" mode="ios" class="extra-padding ion-padding ion-margin-top" color="primary"
+        size="large" expand="block">New Collection</ion-button>
     </ion-content>
   </ion-menu>
   <ion-router-outlet id="content" main></ion-router-outlet>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="list">
+        <ion-icon name="albums-outline"></ion-icon>
+        <ion-label>Tags</ion-label>
+        <ion-badge color="danger">6</ion-badge>
+      </ion-tab-button>
+
+      <ion-fab-button color="primary" (click)="presentActionSheet()">
+        <strong>Scan</strong>
+      </ion-fab-button>
+
+      <ion-tab-button tab="profile">
+        <ion-icon name="settings-outline"></ion-icon>
+        <ion-label>Settings</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-app>
