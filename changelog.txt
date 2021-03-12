@@ -1,4 +1,4 @@
-Title: Ecommerce Theme
+Title: NoTouchTags Theme
 Author: ionic4themes
 Contact: info@ionic4themes.com
 ---------
