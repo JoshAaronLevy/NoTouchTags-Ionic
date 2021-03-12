@@ -1,40 +1,48 @@
 <ion-header class="ion-no-border ion-padding" mode="md">
   <ion-toolbar mode="md">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="home" mode="md"></ion-back-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" name="search"></ion-icon>
-      </ion-button>
-      <ion-button>
-        <ion-icon slot="icon-only" name="options"></ion-icon>
-      </ion-button>
-      <div class="numberCircle">3</div>
-    </ion-buttons>
+    <ion-searchbar *ngIf="!loading" showCancelButton="never" animated></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true"  class="ion-padding">
-
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-item lines="none" class="ion-margin-bottom">
-    <h1 class="ion-no-padding ion-no-margin">Shoes</h1>
-    <ion-button fill="clear" slot="end" color="dark" mode="ios">
-      <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
-      <strong>Sort by</strong>
-    </ion-button>
+    <h1 class="ion-no-padding ion-no-margin">Tags</h1>
   </ion-item>
-
-  <ng-container *ngFor="let product of products">
-    <ion-item class="product ion-margin-bottom" routerLink="/product" lines="none" detail="false">
+  <ng-container *ngIf="!loading">
+    <ion-item-sliding *ngFor="let tag of tags">
+      <ion-item-options side="start">
+        <ion-item-option color="danger" (click)="removeTag(tag)">Remove</ion-item-option>
+      </ion-item-options>
+      <ion-item class="product ion-margin-bottom" (click)="routeToTagDetails(tag)" lines="none" detail="false">
+        <ion-thumbnail slot="start">
+          <img [src]="tag.imageUrl">
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{tag.tagTitle}}</h2>
+          <h4>{{tag.tagSubTitle}}</h4>
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="favoriteTag(tag)">Favorite</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ng-container>
+  <ion-list *ngIf="loading">
+    <ion-item *ngFor="let item of skeletonItems">
       <ion-thumbnail slot="start">
-        <img [src]="product.image">
+        <ion-skeleton-text animated></ion-skeleton-text>
       </ion-thumbnail>
       <ion-label>
-        <h2>{{product.name}}</h2>
-        <p>${{product.price}}</p>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
       </ion-label>
     </ion-item>
-  </ng-container>
-
+  </ion-list>
 </ion-content>
