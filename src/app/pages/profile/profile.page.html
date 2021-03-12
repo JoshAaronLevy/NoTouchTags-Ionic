@@ -1,42 +1,54 @@
 <ion-content>
+  <ion-item lines="none" class="ion-margin-bottom">
+    <h1 class="ion-no-padding ion-no-margin">Settings</h1>
+  </ion-item>
   <ion-list>
-    <ion-item lines="full">
+    <ion-item>
       <ion-icon slot="start" name="moon"></ion-icon>
       <ion-label>
-        Toggle Dark/Light Theme
+        Light/Dark Theme
       </ion-label>
       <ion-toggle id="themeToggle" slot="end" (click)="toggleColorScheme()"></ion-toggle>
     </ion-item>
   </ion-list>
-  <div id="hero" style="background-image: url('/assets/img/sport2.jpg'); ">
-    <div class="bio">
-      <ion-avatar>
-        <img src="/assets/img/post1.jpg">
-      </ion-avatar>
-      <h1>Alexia Morales</h1>
-    </div>
-  </div>
-  <div id="mosaic" class="ion-padding">
-    <ion-grid class="ion-padding">
-      <ion-row class="ion-no-padding ion-no-margin">
-        <ion-col style="background-image:url('/assets/img/sport4.jpg')" id="left-img"
-          class="ion-no-padding ion-no-maqrgin">
-        </ion-col>
-        <ion-col class="ion-no-padding ion-no-margin">
-          <ion-grid class="ion-no-padding ion-no-margin">
-            <ion-row class="ion-no-padding ion-no-margin">
-              <ion-col style="background-image:url('/assets/img/sport3.jpg')" id="top-right-img"
-                class="ion-no-padding ion-no-margin">
-              </ion-col>
-            </ion-row>
-            <ion-row class="ion-no-padding ion-no-margin">
-              <ion-col style="background-image:url('/assets/img/sport.jpg')" id="bottom-right-img"
-                class="ion-no-padding ion-no-margin">
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
+  <ion-list>
+    <ion-item button routerLink="/edit-profile">
+      <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+      <ion-label>
+        <h3>Edit Profile</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item button onclick="showDetail('Tags')">
+      <ion-icon slot="start" name="albums-outline"></ion-icon>
+      <ion-label>
+        <h3>Add/Edit NFC Tags</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item button onclick="showDetail('QR')">
+      <ion-icon slot="start" name="qr-code-outline"></ion-icon>
+      <ion-label>
+        <h3>Add/Edit QR Codes</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item button onclick="showDetail('Contact')">
+      <ion-icon slot="start" name="mail-outline"></ion-icon>
+      <ion-label>
+        <h3>Contact Us</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item button onclick="signOut()">
+      <ion-icon slot="start" name="log-out-outline"></ion-icon>
+      <ion-label>
+        <h3>Sign Out</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

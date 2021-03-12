@@ -21,4 +21,11 @@ export class ProfilePage implements OnInit {
     });
   }
 
+  showDetail(title) {
+    console.log(title);
+    const nav = document.querySelector('ion-nav');
+    console.log(nav);
+    nav.push('nav-detail', title);
+    console.log(nav);
+  }
 }
