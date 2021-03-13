@@ -35,6 +35,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/list/list.module').then(m => m.ListPageModule)
   },
   {
+    path: 'my-tags',
+    loadChildren: () => import('./pages/my-tags/my-tags.module').then(m => m.MyTagsPageModule)
+  },
+  {
     path: 'settings',
     loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule)
   },

@@ -1,0 +1,17 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="tags" class="tab-button-left">
+      <ion-icon name="albums-outline"></ion-icon>
+      <ion-label>Tags</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="settings" class="tab-button-right">
+      <ion-icon name="settings-outline"></ion-icon>
+      <ion-label>Settings</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+<div class="scan-button-container">
+  <ion-fab-button color="primary" (click)="presentActionSheet()">
+    <strong>Scan</strong>
+  </ion-fab-button>
+</div>

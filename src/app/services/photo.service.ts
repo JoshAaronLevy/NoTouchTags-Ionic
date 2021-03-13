@@ -1,29 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
-import { Tags } from '../models/tag.model';
+import {
+  Plugins,
+  CameraResultType,
+  Capacitor,
+  FilesystemDirectory,
+  CameraPhoto,
+  CameraSource
+} from '@capacitor/core';
+
+const { Camera, Filesystem, Storage } = Plugins;
 
 @Injectable({
   providedIn: 'root'
 })
 export class PhotoService {
-  customersObservable: Observable<Tags[]>;
+  constructor() { }
 
-  constructor(
-    private http: HttpClient
-  ) { }
-
-  public getAllTags(): Observable<Tags[]> {
-    return this.http.get<Tags[]>('https://notouchtags-api.herokuapp.com/tags')
-      .pipe(
-        map(res => {
-          return res;
-        })
-      );
-  }
-
-  public getQuery(ownerEmail: string): Observable<Tags[]> {
-    return this.http.get<Tags[]>('https://notouchtags-api.herokuapp.com/tags/' + ownerEmail);
+  public async addNewToGallery() {
+    // Take a photo
+    const capturedPhoto = await Camera.getPhoto({
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Camera,
+      quality: 100
+    });
   }
 }

@@ -33,11 +33,31 @@
   display: flex;
   justify-content: center;
   position: relative;
-  top: 91%;
-  height: 65px;
+  top: 87%;
+  height: 90px;
+  width: 90px;
+  left: 38%;
 }
 
 .scan-button-container ion-fab-button {
-  height: 65px;
-  width: 65px;
+  height: 90px;
+  width: 90px;
+}
+
+.tab-button-left {
+  padding-right: 55px;
+}
+
+.tab-button-right {
+  padding-left: 55px;
+}
+
+h4.scan-label {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0px;
+}
+
+.settings-label {
+  font-size: 16px !important;
 }

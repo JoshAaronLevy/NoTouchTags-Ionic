@@ -1,13 +1,10 @@
 <ion-header translucent>
   <ion-toolbar>
-    <ion-title>Tags</ion-title>
-  </ion-toolbar>
-  <ion-toolbar>
-    <ion-searchbar *ngIf="!loading" showCancelButton="never" animated></ion-searchbar>
+    <ion-title>Scanned Tags/QR Codes</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true" class="ion-padding">
+  <ion-searchbar *ngIf="!loading" showCancelButton="never" animated></ion-searchbar>
   <ng-container *ngIf="!loading">
     <ion-item-sliding *ngFor="let tag of tags">
       <ion-item-options side="start">

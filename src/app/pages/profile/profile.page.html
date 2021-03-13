@@ -5,17 +5,11 @@
 </ion-header>
 <ion-content>
   <ion-list>
-    <ion-item *ngIf="theme == 'light'">
-      <ion-label>Theme</ion-label>
-      <ion-button color="primary" size="default">Light
-      </ion-button>
-      <ion-button color="light" size="default" (click)="enableDarkTheme()">Dark</ion-button>
-    </ion-item>
-    <ion-item *ngIf="theme == 'dark'">
-      <ion-label>Theme</ion-label>
-      <ion-button color="light" size="default" (click)="enableLightTheme()">Light
-      </ion-button>
-      <ion-button color="primary" size="default">Dark</ion-button>
+    <ion-item button (click)="changeTheme()">
+      <ion-icon slot="start" name="color-palette-outline"></ion-icon>
+      <ion-label>
+        <h3>Change Theme</h3>
+      </ion-label>
     </ion-item>
   </ion-list>
   <ion-list>
@@ -27,7 +21,7 @@
     </ion-item>
   </ion-list>
   <ion-list>
-    <ion-item button onclick="showDetail('Tags')">
+    <ion-item button routerLink="/my-tags" (click)="setPrevious()">
       <ion-icon slot="start" name="albums-outline"></ion-icon>
       <ion-label>
         <h3>Add/Edit NFC Tags</h3>
@@ -35,7 +29,7 @@
     </ion-item>
   </ion-list>
   <ion-list>
-    <ion-item button onclick="showDetail('QR')">
+    <ion-item button routerLink="/my-tags" (click)="setPrevious()">
       <ion-icon slot="start" name="qr-code-outline"></ion-icon>
       <ion-label>
         <h3>Add/Edit QR Codes</h3>

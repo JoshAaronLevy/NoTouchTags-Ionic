@@ -15,9 +15,9 @@ export class AppComponent implements OnInit {
 
   constructor(
     private platform: Platform,
-    public router: Router,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
+    public router: Router,
     public actionSheetController: ActionSheetController
   ) {
     this.initializeApp();
@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
       document.body.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     }
+    console.log(this.router.getCurrentNavigation());
   }
 
   initializeApp() {

@@ -50,6 +50,27 @@ export class ProfilePage implements OnInit {
     nav.push('nav-detail', title);
   }
 
+  async changeTheme() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Change Theme',
+      buttons: [
+        {
+          text: 'Light',
+          handler: () => {
+            this.enableLightTheme();
+          }
+        }, {
+          text: 'Dark',
+          handler: () => {
+            this.enableDarkTheme();
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
   signOut() {
     console.log('Signed Out!');
     this.router.navigate(['/login']);
@@ -76,7 +97,6 @@ export class ProfilePage implements OnInit {
         }
       ]
     });
-
     await alert.present();
   }
 }

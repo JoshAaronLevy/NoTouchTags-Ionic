@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Tags } from 'src/app/models/tag.model';
 import { TagsService } from 'src/app/services/tags.service';
 
@@ -17,10 +18,11 @@ export class ListPage implements OnInit {
   loading: boolean;
   searchEnabled: boolean;
   skeletonItems: any[] = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
   ];
 
   constructor(
+    public router: Router,
     public tagService: TagsService
   ) { }
 
@@ -43,6 +45,7 @@ export class ListPage implements OnInit {
         this.loading = false;
       }, 1000);
     });
+    console.log(this.router.getCurrentNavigation());
   }
 
   enableSearch() {
