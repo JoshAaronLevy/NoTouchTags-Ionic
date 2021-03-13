@@ -17,15 +17,13 @@ export class ProfilePage implements OnInit {
 
     // Listen for the toggle check/uncheck to toggle the dark class on the <body>
     toggle.addEventListener('ionChange', (ev) => {
+      console.log(ev);
       document.body.classList.toggle('dark', ev.detail.checked);
     });
   }
 
   showDetail(title) {
-    console.log(title);
     const nav = document.querySelector('ion-nav');
-    console.log(nav);
     nav.push('nav-detail', title);
-    console.log(nav);
   }
 }

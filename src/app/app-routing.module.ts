@@ -15,6 +15,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
   {
+    path: 'scan-qr-code',
+    loadChildren: () => import('./pages/scan-qr-code/scan-qr-code.module').then(m => m.ScanQRCodePageModule)
+  },
+  {
     path: 'product',
     loadChildren: () => import('./pages/product/product.module').then(m => m.ProductPageModule)
   },

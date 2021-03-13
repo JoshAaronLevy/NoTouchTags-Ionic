@@ -14,37 +14,37 @@
 <ion-content [fullscreen]="true">
 
   <ion-slides class="gallery" Sclass="ion-padding-top" pager="true">
-    <ion-slide class="ion-margin-bottom" *ngFor="let image of images">
+    <!-- <ion-slide class="ion-margin-bottom" *ngFor="let image of images">
       <img [src]="image.image">
-    </ion-slide>
+    </ion-slide> -->
   </ion-slides>
 
   <div class="ion-padding">
 
     <div class="title">
-      <img [src]="product.logo">
+      <!-- <img [src]="product.logo">
       <h1>{{product.name}}</h1>
-      <h2>${{product.price}}</h2>
+      <h2>${{product.price}}</h2> -->
     </div>
 
     <ion-item lines="none">
       <p><strong>Size</strong></p>
     </ion-item>
 
-    <ion-slides pager="false" [options]="slideOpts">
+    <!-- <ion-slides pager="false" [options]="slideOpts">
       <ng-container *ngFor="let size of sizes">
         <ion-slide class="size-slide ion-margin-bottom" [ngStyle]="{'background' : size.selected === true ? 'var(--ion-color-dark)' : 'var(--ion-color-medium)',
         'color' : size.selected === true ? 'white' : 'var(--ion-color-dark)' }">
           {{size.number}}
         </ion-slide>
       </ng-container>
-    </ion-slides>
+    </ion-slides> -->
 
     <ion-item lines="none">
       <p><strong>Description</strong></p>
     </ion-item>
     <ion-item lines="none" class="description">
-       Lorem ipsum dolor sit amet, consectetur adipiscing 
+      Lorem ipsum dolor sit amet, consectetur adipiscing
     </ion-item>
 
   </div>

@@ -3,6 +3,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ActionSheetController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -38,6 +39,7 @@ export class AppComponent {
 
   constructor(
     private platform: Platform,
+    public router: Router,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public actionSheetController: ActionSheetController
@@ -58,16 +60,16 @@ export class AppComponent {
       cssClass: 'my-custom-class',
       buttons: [
         {
-          text: 'NFC Tag',
+          text: 'Scan NFC Tag',
           icon: 'albums-outline',
           handler: () => {
             console.log('NFC Tag clicked');
           }
         }, {
-          text: 'QR Code',
+          text: 'Scan QR Code',
           icon: 'qr-code-outline',
           handler: () => {
-            console.log('QR Code clicked');
+            this.router.navigate(['/scan-qr-code']);
           }
         }
       ]
