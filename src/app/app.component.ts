@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
           text: 'Scan NFC Tag',
           icon: 'albums-outline',
           handler: () => {
-            console.log('NFC Tag clicked');
+            this.router.navigate(['/scan-nfc-tag']);
           }
         }, {
           text: 'Scan QR Code',

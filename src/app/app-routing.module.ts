@@ -15,6 +15,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
   },
   {
+    path: 'scan-nfc-tag',
+    loadChildren: () => import('./pages/scan-nfc-tag/scan-nfc-tag.module').then(m => m.ScanNFCTagPageModule)
+  },
+  {
     path: 'scan-qr-code',
     loadChildren: () => import('./pages/scan-qr-code/scan-qr-code.module').then(m => m.ScanQRCodePageModule)
   },
@@ -27,11 +31,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tag-details/tag-details.module').then(m => m.TagDetailsPageModule)
   },
   {
-    path: 'list',
+    path: 'tags',
     loadChildren: () => import('./pages/list/list.module').then(m => m.ListPageModule)
   },
   {
-    path: 'profile',
+    path: 'settings',
     loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule)
   },
   {

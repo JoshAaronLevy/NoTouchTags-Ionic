@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -8,7 +10,10 @@ import { Component, OnInit } from '@angular/core';
 export class ProfilePage implements OnInit {
   theme: string;
 
-  constructor() { }
+  constructor(
+    public alertController: AlertController,
+    public router: Router
+  ) { }
 
   ngOnInit() {
     if (localStorage.getItem('theme') === 'dark') {
@@ -43,5 +48,35 @@ export class ProfilePage implements OnInit {
   showDetail(title) {
     const nav = document.querySelector('ion-nav');
     nav.push('nav-detail', title);
+  }
+
+  signOut() {
+    console.log('Signed Out!');
+    this.router.navigate(['/login']);
+  }
+
+  async presentSignOutConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Sign Out',
+      subHeader: 'Are you sure?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Yes',
+          handler: () => {
+            this.signOut();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

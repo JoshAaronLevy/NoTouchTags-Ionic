@@ -51,7 +51,7 @@
     </ion-item>
   </ion-list>
   <ion-list>
-    <ion-item button onclick="signOut()">
+    <ion-item button (click)="presentSignOutConfirm()">
       <ion-icon slot="start" name="log-out-outline"></ion-icon>
       <ion-label>
         <h3>Sign Out</h3>
