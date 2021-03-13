@@ -8,9 +8,9 @@
         <!-- <ion-badge color="danger">6</ion-badge> -->
       </ion-tab-button>
 
-      <ion-fab-button color="primary" (click)="presentActionSheet()">
+      <!-- <ion-fab-button color="primary" (click)="presentActionSheet()">
         <strong>Scan</strong>
-      </ion-fab-button>
+      </ion-fab-button> -->
 
       <ion-tab-button tab="settings">
         <ion-icon name="settings-outline"></ion-icon>
@@ -18,4 +18,9 @@
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
+  <div class="scan-button-container">
+    <ion-fab-button color="primary" (click)="presentActionSheet()">
+      <strong>Scan</strong>
+    </ion-fab-button>
+  </div>
 </ion-app>

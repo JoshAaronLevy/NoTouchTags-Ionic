@@ -28,3 +28,16 @@
     }
   }
 }
+
+.scan-button-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 91%;
+  height: 65px;
+}
+
+.scan-button-container ion-fab-button {
+  height: 65px;
+  width: 65px;
+}
