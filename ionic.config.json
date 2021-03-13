@@ -1,7 +1,8 @@
 {
   "name": "notouchtags",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }

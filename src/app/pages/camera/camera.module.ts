@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { CreateTagPageRoutingModule } from './create-tag-routing.module';
-import { CreateTagPage } from './create-tag.page';
+import { CameraPageRoutingModule } from './camera-routing.module';
+import { CameraPage } from './camera.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CreateTagPageRoutingModule
+    CameraPageRoutingModule
   ],
-  declarations: [CreateTagPage]
+  declarations: [CameraPage]
 })
-export class CreateTagPageModule { }
+export class CameraPageModule { }

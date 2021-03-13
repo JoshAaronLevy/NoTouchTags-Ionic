@@ -39,6 +39,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/my-tags/my-tags.module').then(m => m.MyTagsPageModule)
   },
   {
+    path: 'create-tag',
+    loadChildren: () => import('./pages/create-tag/create-tag.module').then(m => m.CreateTagPageModule)
+  },
+  {
+    path: 'camera',
+    loadChildren: () => import('./pages/camera/camera.module').then(m => m.CameraPageModule)
+  },
+  {
     path: 'settings',
     loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule)
   },
