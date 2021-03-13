@@ -1,18 +1,25 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
-  <ion-item lines="none" class="ion-margin-bottom">
-    <h1 class="ion-no-padding ion-no-margin">Settings</h1>
-  </ion-item>
   <ion-list>
-    <ion-item>
-      <ion-icon slot="start" name="moon"></ion-icon>
-      <ion-label>
-        Light/Dark Theme
-      </ion-label>
-      <ion-toggle id="themeToggle" slot="end" (click)="toggleColorScheme()"></ion-toggle>
+    <ion-item *ngIf="theme == 'light'">
+      <ion-label>Theme</ion-label>
+      <ion-button color="primary" size="default">Light
+      </ion-button>
+      <ion-button color="light" size="default" (click)="enableDarkTheme()">Dark</ion-button>
+    </ion-item>
+    <ion-item *ngIf="theme == 'dark'">
+      <ion-label>Theme</ion-label>
+      <ion-button color="light" size="default" (click)="enableLightTheme()">Light
+      </ion-button>
+      <ion-button color="primary" size="default">Dark</ion-button>
     </ion-item>
   </ion-list>
   <ion-list>
-    <ion-item button routerLink="/edit-profile">
+    <ion-item button routerLink="/edit-profile" (click)="setPrevious()">
       <ion-icon slot="start" name="person-circle-outline"></ion-icon>
       <ion-label>
         <h3>Edit Profile</h3>

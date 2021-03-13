@@ -6,8 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-profile.page.scss'],
 })
 export class EditProfilePage implements OnInit {
+  previousRoute: string;
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.previousRoute = localStorage.getItem('previousRoute');
+    this.previousRoute = `/${this.previousRoute}`;
+  }
 }

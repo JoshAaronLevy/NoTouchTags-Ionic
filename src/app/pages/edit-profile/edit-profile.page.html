@@ -1,7 +1,12 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="[previousRoute]"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
-  <ion-item lines="none" class="ion-margin-bottom">
-    <h1 class="ion-no-padding ion-no-margin">Settings</h1>
-  </ion-item>
   <ion-item>
     <ion-label>Application</ion-label>
     <ion-select interface="popover">

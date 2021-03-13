@@ -1,13 +1,13 @@
-<ion-header class="ion-no-border ion-padding" mode="md">
-  <ion-toolbar mode="md">
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Tags</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
     <ion-searchbar *ngIf="!loading" showCancelButton="never" animated></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <ion-item lines="none" class="ion-margin-bottom">
-    <h1 class="ion-no-padding ion-no-margin">Tags</h1>
-  </ion-item>
   <ng-container *ngIf="!loading">
     <ion-item-sliding *ngFor="let tag of tags">
       <ion-item-options side="start">

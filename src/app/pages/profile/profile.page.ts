@@ -6,20 +6,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+  theme: string;
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (localStorage.getItem('theme') === 'dark') {
+      this.theme = 'dark';
+      this.enableDarkTheme();
+    } else if (localStorage.getItem('theme') === undefined || localStorage.getItem('theme') === null) {
+      this.theme = 'light';
+      this.enableLightTheme();
+    } else {
+      this.theme = 'light';
+      this.enableLightTheme();
+    }
+  }
 
-  toggleColorScheme() {
-    // Query for the toggle that is used to change between themes
-    const toggle = document.querySelector('#themeToggle');
+  enableLightTheme() {
+    document.body.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
+    this.theme = 'light';
+  }
 
-    // Listen for the toggle check/uncheck to toggle the dark class on the <body>
-    toggle.addEventListener('ionChange', (ev) => {
-      console.log(ev);
-      document.body.classList.toggle('dark', ev.detail.checked);
-    });
+  enableDarkTheme() {
+    document.body.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
+    this.theme = 'dark';
+  }
+
+  setPrevious() {
+    localStorage.removeItem('previousRoute');
+    localStorage.setItem('previousRoute', 'profile');
   }
 
   showDetail(title) {

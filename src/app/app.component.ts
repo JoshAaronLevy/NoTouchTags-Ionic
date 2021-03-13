@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -10,32 +10,8 @@ import { Router } from '@angular/router';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent {
-  public appPages = [
-    {
-      title: 'Home',
-      url: 'tabs/tab1',
-      icon: 'list'
-    },
-
-    {
-      title: 'Catalog',
-      url: '/catalog',
-      icon: 'list'
-    },
-    {
-      title: 'Account',
-      url: '/account',
-      icon: 'list'
-    },
-    {
-      title: 'Index',
-      url: '/index',
-      icon: 'list'
-    }
-
-  ];
-
+export class AppComponent implements OnInit {
+  theme: string;
 
   constructor(
     private platform: Platform,
@@ -45,6 +21,17 @@ export class AppComponent {
     public actionSheetController: ActionSheetController
   ) {
     this.initializeApp();
+  }
+
+  ngOnInit() {
+    this.theme = localStorage.getItem('theme');
+    if (this.theme === 'dark') {
+      document.body.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.body.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
   }
 
   initializeApp() {
