@@ -19,9 +19,7 @@
       "SplashShowOnlyFirstTime": "false",
       "SplashScreen": "screen",
       "SplashScreenDelay": "3000",
-      "ShowSplashScreenSpinner": "false",
-      "GOOGLE_MAPS_ANDROID_API_KEY": "(api key)",
-      "GOOGLE_MAPS_IOS_API_KEY": "(api key)"
+      "ShowSplashScreenSpinner": "false"
     }
   }
 }

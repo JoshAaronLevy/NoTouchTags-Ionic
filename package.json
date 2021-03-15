@@ -21,11 +21,11 @@
     "@capacitor/android": "^2.4.7",
     "@capacitor/cli": "^2.4.7",
     "@capacitor/core": "^2.4.7",
+    "@capacitor/ios": "^2.4.7",
     "@ionic-native/chooser": "^5.31.1",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/file-chooser": "^5.31.1",
     "@ionic-native/file-transfer": "^5.31.1",
-    "@ionic-native/google-maps": "^5.27.0-beta-20200630",
     "@ionic-native/keyboard": "^5.31.1",
     "@ionic-native/nfc": "^5.31.1",
     "@ionic-native/qr-scanner": "^5.31.1",
@@ -51,13 +51,13 @@
     "@angular/compiler-cli": "~10.0.0",
     "@angular/language-service": "~10.0.0",
     "@ionic/angular-toolkit": "^2.3.0",
+    "@ionic/app-scripts": "^3.2.4",
     "@ionic/lab": "3.2.9",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "cordova-plugin-device": "^2.0.2",
-    "cordova-plugin-googlemaps": "github:mapsplugin/cordova-plugin-googlemaps#multiple_maps",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^4.2.1",
     "cordova-plugin-qrscanner": "^3.0.1",
@@ -91,11 +91,7 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-sign-in-with-apple": {},
       "cordova-plugin-qrscanner": {},
-      "phonegap-nfc": {},
-      "cordova-plugin-googlemaps": {
-        "LOCATION_WHEN_IN_USE_DESCRIPTION": "This app wants to get your location while this app runs only.",
-        "LOCATION_ALWAYS_USAGE_DESCRIPTION": "This app wants to get your location always, even this app runs in background."
-      }
+      "phonegap-nfc": {}
     },
     "platforms": [
       "android",
