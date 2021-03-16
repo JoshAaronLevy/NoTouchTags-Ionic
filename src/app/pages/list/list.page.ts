@@ -45,7 +45,6 @@ export class ListPage implements OnInit {
         this.loading = false;
       }, 1000);
     });
-    console.log(this.router.getCurrentNavigation());
   }
 
   enableSearch() {
