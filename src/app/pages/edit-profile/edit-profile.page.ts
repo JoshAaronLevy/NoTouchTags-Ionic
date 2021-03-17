@@ -55,5 +55,16 @@ export class EditProfilePage implements OnInit {
     toast.present();
   }
 
-  editUser() { }
+  editUser() {
+    const User = new Parse.User();
+    const query = new Parse.Query(User);
+    query.get(this.userId).then((user) => {
+      user.set('firstName', this.userEdit.value.firstName);
+      user.save().then((response) => {
+        console.log('Updated user', response);
+      }).catch((error) => {
+        console.error('Error while updating user', error);
+      });
+    });
+  }
 }
