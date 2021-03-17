@@ -13,12 +13,19 @@ import { Platform } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
+  isApple: boolean;
   constructor(
+    private platform: Platform,
     private signInWithApple: SignInWithApple
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.platform.is('ios') === true) {
+      this.isApple = true;
+    } else {
+      this.isApple = false;
+    }
+  }
 
   AppleSignIn() {
     this.signInWithApple

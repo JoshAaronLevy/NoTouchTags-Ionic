@@ -32,7 +32,6 @@ export class AppComponent implements OnInit {
       document.body.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     }
-    console.log(this.router.getCurrentNavigation());
   }
 
   initializeApp() {
