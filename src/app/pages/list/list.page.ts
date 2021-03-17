@@ -6,6 +6,11 @@ import { ParseKey } from 'src/keys/parse.interface';
 import * as Parse from 'parse';
 import { ActionSheetController } from '@ionic/angular';
 
+function parseResults(results: Array<any>) {
+  return results.map(result => {
+    return { ...result.attributes };
+  });
+}
 @Component({
   selector: 'app-list',
   templateUrl: './list.page.html',
@@ -28,22 +33,26 @@ export class ListPage implements OnInit {
     public router: Router,
     public tagService: TagsService,
     public actionSheetController: ActionSheetController
-  ) { }
+  ) {
+    Parse.initialize(ParseKey.appId, ParseKey.javascript);
+    Parse.serverURL = ParseKey.serverURL;
+  }
 
   ngOnInit() {
     this.searchEnabled = false;
     this.loading = true;
-    this.tagService.getAllTags().subscribe(data => {
-      this.tags = data;
-      this.tags.forEach((a) => {
-        a.imageUrl = '';
-      });
-      // tslint:disable-next-line: prefer-for-of
+    const Tags = Parse.Object.extend('Tags');
+    const query = new Parse.Query(Tags);
+    query.find().then((results) => {
+      results = parseResults(results);
+      this.tags = results;
       for (let i = 0; i < this.tags.length; i++) {
+        this.tags[i].imageUrl = '';
         if (this.tags[i].tagPhotoRef === undefined) {
-          this.tags[i].tagPhotoRef = '12345';
+          this.tags[i].imageUrl = `https://photos.homecards.com/rebeacons/Tag-12345-1.jpg`;
+        } else {
+          this.tags[i].imageUrl = `https://photos.homecards.com/rebeacons/Tag-${this.tags[i].tagPhotoRef}-1.jpg`;
         }
-        this.tags[i].imageUrl = `https://photos.homecards.com/rebeacons/Tag-${this.tags[i].tagPhotoRef}-1.jpg`;
       }
       setTimeout(() => {
         this.loading = false;
