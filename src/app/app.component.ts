@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
+  username: string;
+  tabsVisible: boolean;
   theme: string;
 
   constructor(
@@ -24,6 +26,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.username = localStorage.getItem('username');
+    if (this.username != null || this.username !== undefined) {
+      this.tabsVisible = true;
+    } else {
+      this.tabsVisible = false;
+    }
     this.theme = localStorage.getItem('theme');
     if (this.theme === 'dark') {
       document.body.classList.add('dark');
@@ -39,28 +47,5 @@ export class AppComponent implements OnInit {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-  }
-
-  async presentActionSheet() {
-    const actionSheet = await this.actionSheetController.create({
-      header: 'Select Scan Mode',
-      cssClass: 'my-custom-class',
-      buttons: [
-        {
-          text: 'Scan NFC Tag',
-          icon: 'albums-outline',
-          handler: () => {
-            this.router.navigate(['/scan-nfc-tag']);
-          }
-        }, {
-          text: 'Scan QR Code',
-          icon: 'qr-code-outline',
-          handler: () => {
-            this.router.navigate(['/scan-qr-code']);
-          }
-        }
-      ]
-    });
-    await actionSheet.present();
   }
 }

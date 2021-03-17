@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Tags } from 'src/app/models/tag.model';
 import { TagsService } from 'src/app/services/tags.service';
+import { ParseKey } from 'src/keys/parse.interface';
+import * as Parse from 'parse';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-list',
@@ -23,7 +26,8 @@ export class ListPage implements OnInit {
 
   constructor(
     public router: Router,
-    public tagService: TagsService
+    public tagService: TagsService,
+    public actionSheetController: ActionSheetController
   ) { }
 
   ngOnInit() {
@@ -43,8 +47,39 @@ export class ListPage implements OnInit {
       }
       setTimeout(() => {
         this.loading = false;
-      }, 1000);
+      }, 500);
     });
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Select Scan Mode',
+      cssClass: 'my-custom-class',
+      buttons: [
+        {
+          text: 'Scan NFC Tag',
+          icon: 'albums-outline',
+          handler: () => {
+            this.router.navigate(['/scan-nfc-tag']);
+          }
+        }, {
+          text: 'Scan QR Code',
+          icon: 'qr-code-outline',
+          handler: () => {
+            this.router.navigate(['/scan-qr-code']);
+          }
+        }
+      ]
+    });
+    await actionSheet.present();
+  }
+
+  routeToTags() {
+    this.router.navigate(['/tags']);
+  }
+
+  routeToSettings() {
+    this.router.navigate(['/settings']);
   }
 
   enableSearch() {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { ActionSheetController, AlertController } from '@ionic/angular';
 import { ParseKey } from 'src/keys/parse.interface';
 import * as Parse from 'parse';
 
@@ -14,7 +14,8 @@ export class ProfilePage implements OnInit {
 
   constructor(
     public alertController: AlertController,
-    public router: Router
+    public router: Router,
+    public actionSheetController: ActionSheetController
   ) {
     Parse.initialize(ParseKey.appId, ParseKey.javascript);
     Parse.serverURL = ParseKey.serverURL;
@@ -77,8 +78,11 @@ export class ProfilePage implements OnInit {
   }
 
   signOut() {
-    console.log('Signed Out!');
-    this.router.navigate(['/login']);
+    localStorage.removeItem('username');
+    localStorage.clear();
+    setTimeout(() => {
+      this.router.navigate(['/login']);
+    }, 500);
   }
 
   async presentSignOutConfirm() {
@@ -97,7 +101,7 @@ export class ProfilePage implements OnInit {
         }, {
           text: 'Yes',
           handler: () => {
-            Parse.User.signOut().then(() => {
+            Parse.User.logOut().then(() => {
               this.signOut();
             });
           }
@@ -105,5 +109,36 @@ export class ProfilePage implements OnInit {
       ]
     });
     await alert.present();
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Select Scan Mode',
+      cssClass: 'my-custom-class',
+      buttons: [
+        {
+          text: 'Scan NFC Tag',
+          icon: 'albums-outline',
+          handler: () => {
+            this.router.navigate(['/scan-nfc-tag']);
+          }
+        }, {
+          text: 'Scan QR Code',
+          icon: 'qr-code-outline',
+          handler: () => {
+            this.router.navigate(['/scan-qr-code']);
+          }
+        }
+      ]
+    });
+    await actionSheet.present();
+  }
+
+  routeToTags() {
+    this.router.navigate(['/tags']);
+  }
+
+  routeToSettings() {
+    this.router.navigate(['/settings']);
   }
 }

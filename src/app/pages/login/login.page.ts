@@ -10,6 +10,7 @@ import { AlertController, ToastController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
 import { ParseKey } from 'src/keys/parse.interface';
 import * as Parse from 'parse';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,11 +19,13 @@ import * as Parse from 'parse';
 })
 export class LoginPage implements OnInit {
   isApple: boolean;
+  username: string;
   userLogin: FormGroup;
   userEmail: string;
   constructor(
     private platform: Platform,
     private formBuilder: FormBuilder,
+    public router: Router,
     private signInWithApple: SignInWithApple,
     public toastController: ToastController,
     public alertController: AlertController
@@ -32,6 +35,13 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    this.username = localStorage.getItem('username');
+    console.log(this.username);
+    // if (this.username !== null) {
+    //   this.router.navigate(['/tags']);
+    // } else if (this.username !== undefined) {
+    //   this.router.navigate(['/tags']);
+    // }
     if (this.platform.is('ios') === true) {
       this.isApple = true;
     } else {
@@ -45,7 +55,12 @@ export class LoginPage implements OnInit {
 
   login() {
     Parse.User.logIn(this.userLogin.value.userName, this.userLogin.value.password).then((user) => {
+      localStorage.setItem('sessionToken', user.attributes.sessionToken);
+      localStorage.setItem('username', user.attributes.accountemail);
+      this.router.navigate(['/tags']);
       console.log(user);
+      console.log(localStorage.getItem('sessionToken'));
+      console.log(localStorage.getItem('username'));
     }).catch((error) => {
       this.presentLoginErrorToast(error);
     });
@@ -123,5 +138,4 @@ export class LoginPage implements OnInit {
         console.error(error);
       });
   }
-
 }
