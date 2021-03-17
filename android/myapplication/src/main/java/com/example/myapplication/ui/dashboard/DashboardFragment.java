@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.dashboard;
+package com.notouchtags.app.ui.dashboard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.myapplication.R;
+import com.notouchtags.app.R;
 
 public class DashboardFragment extends Fragment {
 

@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.notifications;
+package com.notouchtags.app.ui.notifications;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

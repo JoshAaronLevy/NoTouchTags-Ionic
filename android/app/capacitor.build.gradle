@@ -13,7 +13,6 @@ dependencies {
 
 }
 apply from: "../../node_modules/cordova-androidx-build/src/android/cordova-androidx-build.gradle"
-apply from: "../../node_modules/cordova-plugin-qrscanner/src/android/qrscanner.gradle"
 
 if (hasProperty('postBuildExtras')) {
   postBuildExtras()

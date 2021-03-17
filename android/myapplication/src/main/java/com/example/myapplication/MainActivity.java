@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.notouchtags.app;
 
 import android.os.Bundle;
 
