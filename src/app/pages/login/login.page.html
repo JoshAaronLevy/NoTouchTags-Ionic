@@ -19,26 +19,29 @@
   </ion-grid>
 
   <div class="ion-padding-end">
-    <ion-item class="ion-margin-top">
-      <ion-input mode="md" type="email" placeholder="Email"></ion-input>
-    </ion-item>
-
-    <ion-item class="ion-margin-top">
-      <ion-input mode="md" type="password" placeholder="Password"></ion-input>
-    </ion-item>
+    <form role="form" [formGroup]="userLogin" (ngSubmit)="login()">
+      <ion-item class="ion-margin-top">
+        <ion-input mode="md" formControlName="userName" type="email" placeholder="Email"></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin-top">
+        <ion-input mode="md" formControlName="password" type="password" placeholder="Password"></ion-input>
+      </ion-item>
+      <div class="ion-text-center ion-margin-top ion-padding">
+        <ion-button type="submit" class="ion-margin-top ion-margin-bottom" size="large" expand="block" shape="round"
+          color="primary">
+          Login
+        </ion-button>
+      </div>
+    </form>
   </div>
-
   <div class="ion-text-center ion-margin-top ion-padding">
-    <ion-button routerLink="/tags" class="ion-margin-top ion-margin-bottom" size="large" expand="block" shape="round"
-      color="primary">
-      Login
-    </ion-button>
     <ion-button *ngIf="isApple" (click)="AppleSignIn()" color="dark" size="large" expand="full" shape="round"
       class="apple-login">
       <ion-icon expand="full" name="logo-apple" slot="start"></ion-icon>
       Sign In with Apple
     </ion-button>
-
-    <p routerLink="/forgot" class="ion-text-center ion-margin-top ion-padding">Forgot Password</p>
+  </div>
+  <div class="ion-text-center ion-margin-top ion-padding">
+    <a (click)="presentResetPasswordPrompt()" class="ion-text-center ion-margin-top ion-padding">Forgot Password</a>
   </div>
 </ion-content>

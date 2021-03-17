@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { ParseKey } from 'src/keys/parse.interface';
+import * as Parse from 'parse';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +15,10 @@ export class ProfilePage implements OnInit {
   constructor(
     public alertController: AlertController,
     public router: Router
-  ) { }
+  ) {
+    Parse.initialize(ParseKey.appId, ParseKey.javascript);
+    Parse.serverURL = ParseKey.serverURL;
+  }
 
   ngOnInit() {
     if (localStorage.getItem('theme') === 'dark') {
@@ -92,7 +97,9 @@ export class ProfilePage implements OnInit {
         }, {
           text: 'Yes',
           handler: () => {
-            this.signOut();
+            Parse.User.signOut().then(() => {
+              this.signOut();
+            });
           }
         }
       ]
