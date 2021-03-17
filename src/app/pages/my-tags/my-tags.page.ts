@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Tags } from 'src/app/models/tag.model';
 import { TagsService } from 'src/app/services/tags.service';
+import { parseResults } from 'src/shared/parseResults';
+import { getStoredUser } from 'src/shared/userHelper';
+import { ParseKey } from 'src/keys/parse.interface';
+import * as Parse from 'parse';
 
 @Component({
   selector: 'app-my-tags',
@@ -20,32 +24,38 @@ export class MyTagsPage implements OnInit {
   skeletonItems: any[] = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
   ];
+  username: string;
 
   constructor(
     public router: Router,
     public tagService: TagsService
-  ) { }
+  ) {
+    Parse.initialize(ParseKey.appId, ParseKey.javascript);
+    Parse.serverURL = ParseKey.serverURL;
+  }
 
   ngOnInit() {
+    this.username = getStoredUser().username;
     this.searchEnabled = false;
     this.loading = true;
-    this.tagService.getAllTags().subscribe(data => {
-      this.tags = data;
-      this.tags.forEach((a) => {
-        a.imageUrl = '';
-      });
-      // tslint:disable-next-line: prefer-for-of
+    const Tags = Parse.Object.extend('Tags');
+    const query = new Parse.Query(Tags);
+    query.equalTo('userEmail', this.username);
+    query.find().then((results) => {
+      results = parseResults(results);
+      this.tags = results;
       for (let i = 0; i < this.tags.length; i++) {
+        this.tags[i].imageUrl = '';
         if (this.tags[i].tagPhotoRef === undefined) {
-          this.tags[i].tagPhotoRef = '12345';
+          this.tags[i].imageUrl = `https://photos.homecards.com/rebeacons/Tag-12345-1.jpg`;
+        } else {
+          this.tags[i].imageUrl = `https://photos.homecards.com/rebeacons/Tag-${this.tags[i].tagPhotoRef}-1.jpg`;
         }
-        this.tags[i].imageUrl = `https://photos.homecards.com/rebeacons/Tag-${this.tags[i].tagPhotoRef}-1.jpg`;
       }
       setTimeout(() => {
         this.loading = false;
-      }, 1000);
+      }, 500);
     });
-    console.log(this.router.getCurrentNavigation());
   }
 
   enableSearch() {
