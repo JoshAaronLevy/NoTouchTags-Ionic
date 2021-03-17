@@ -11,6 +11,7 @@ import { Platform } from '@ionic/angular';
 import { ParseKey } from 'src/keys/parse.interface';
 import * as Parse from 'parse';
 import { Router } from '@angular/router';
+import { getStoredUser, storeUser } from 'src/shared/userHelper';
 
 @Component({
   selector: 'app-login',
@@ -35,13 +36,10 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    this.username = localStorage.getItem('username');
-    console.log(this.username);
-    // if (this.username !== null) {
-    //   this.router.navigate(['/tags']);
-    // } else if (this.username !== undefined) {
-    //   this.router.navigate(['/tags']);
-    // }
+    this.username = getStoredUser().username;
+    if (this.username != null) {
+      this.router.navigate(['/tags']);
+    }
     if (this.platform.is('ios') === true) {
       this.isApple = true;
     } else {
@@ -55,9 +53,7 @@ export class LoginPage implements OnInit {
 
   login() {
     Parse.User.logIn(this.userLogin.value.userName, this.userLogin.value.password).then((user) => {
-      localStorage.setItem('userId', user.id);
-      localStorage.setItem('sessionToken', user.attributes.sessionToken);
-      localStorage.setItem('username', user.attributes.accountemail);
+      storeUser(user);
       this.router.navigate(['/tags']);
       console.log(user);
     }).catch((error) => {

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ActionSheetController, AlertController } from '@ionic/angular';
 import { ParseKey } from 'src/keys/parse.interface';
 import * as Parse from 'parse';
+import { clearUser } from 'src/shared/userHelper';
 
 @Component({
   selector: 'app-profile',
@@ -78,11 +79,10 @@ export class ProfilePage implements OnInit {
   }
 
   signOut() {
-    localStorage.removeItem('username');
-    localStorage.clear();
+    clearUser();
     setTimeout(() => {
       this.router.navigate(['/login']);
-    }, 500);
+    }, 10);
   }
 
   async presentSignOutConfirm() {

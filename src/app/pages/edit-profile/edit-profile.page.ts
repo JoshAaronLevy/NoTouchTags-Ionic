@@ -4,6 +4,7 @@ import * as Parse from 'parse';
 import { parseResult } from 'src/shared/parseResults';
 import { ToastController } from '@ionic/angular';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { storeUser } from 'src/shared/userHelper';
 
 @Component({
   selector: 'app-edit-profile',
@@ -61,7 +62,8 @@ export class EditProfilePage implements OnInit {
     query.get(this.userId).then((user) => {
       user.set('firstName', this.userEdit.value.firstName);
       user.save().then((response) => {
-        console.log('Updated user', response);
+        storeUser(response);
+        this.user = parseResult(response);
       }).catch((error) => {
         console.error('Error while updating user', error);
       });

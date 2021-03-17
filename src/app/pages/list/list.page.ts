@@ -6,6 +6,7 @@ import { ParseKey } from 'src/keys/parse.interface';
 import * as Parse from 'parse';
 import { ActionSheetController } from '@ionic/angular';
 import { parseResults } from 'src/shared/parseResults';
+import { getStoredUser } from 'src/shared/userHelper';
 
 @Component({
   selector: 'app-list',
@@ -24,6 +25,7 @@ export class ListPage implements OnInit {
   skeletonItems: number[] = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
   ];
+  username: string;
 
   constructor(
     public router: Router,
@@ -35,10 +37,12 @@ export class ListPage implements OnInit {
   }
 
   ngOnInit() {
+    this.username = getStoredUser().username;
     this.searchEnabled = false;
     this.loading = true;
     const Tags = Parse.Object.extend('Tags');
     const query = new Parse.Query(Tags);
+    query.equalTo('userEmail', this.username);
     query.find().then((results) => {
       results = parseResults(results);
       this.tags = results;
