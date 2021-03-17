@@ -55,12 +55,11 @@ export class LoginPage implements OnInit {
 
   login() {
     Parse.User.logIn(this.userLogin.value.userName, this.userLogin.value.password).then((user) => {
+      localStorage.setItem('userId', user.id);
       localStorage.setItem('sessionToken', user.attributes.sessionToken);
       localStorage.setItem('username', user.attributes.accountemail);
       this.router.navigate(['/tags']);
       console.log(user);
-      console.log(localStorage.getItem('sessionToken'));
-      console.log(localStorage.getItem('username'));
     }).catch((error) => {
       this.presentLoginErrorToast(error);
     });

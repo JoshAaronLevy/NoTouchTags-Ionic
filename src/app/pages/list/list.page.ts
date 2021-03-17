@@ -5,12 +5,8 @@ import { TagsService } from 'src/app/services/tags.service';
 import { ParseKey } from 'src/keys/parse.interface';
 import * as Parse from 'parse';
 import { ActionSheetController } from '@ionic/angular';
+import { parseResults } from 'src/shared/parseResults';
 
-function parseResults(results: Array<any>) {
-  return results.map(result => {
-    return { ...result.attributes };
-  });
-}
 @Component({
   selector: 'app-list',
   templateUrl: './list.page.html',
@@ -25,7 +21,7 @@ export class ListPage implements OnInit {
   serverBaseUrl: string;
   loading: boolean;
   searchEnabled: boolean;
-  skeletonItems: any[] = [
+  skeletonItems: number[] = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
   ];
 
