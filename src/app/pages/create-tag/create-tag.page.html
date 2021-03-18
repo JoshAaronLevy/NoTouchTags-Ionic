@@ -1,74 +1,76 @@
 <ion-header translucent>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/settings"></ion-back-button>
+      <ion-back-button defaultHref="/my-tags"></ion-back-button>
     </ion-buttons>
     <ion-title>Create Tag</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-button (click)="presentActionSheet()" expand="block" color="primary">Add Photo(s)</ion-button>
-  <!-- <ion-card class="create-tag-placeholder">
-    <ion-icon name="camera-outline"></ion-icon>
-    <ion-card-header>
-      <ion-card-subtitle>Add Photo(s)</ion-card-subtitle>
-    </ion-card-header>
-  </ion-card> -->
-  <ion-item>
-    <ion-label position="floating">Title</ion-label>
-    <ion-input placeholder="DeLorean" type="text"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Subtitle</ion-label>
-    <ion-input placeholder="Flux Capacitor" type="text"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Price</ion-label>
-    <ion-input placeholder="5000" type="number"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Product ID</ion-label>
-    <ion-input placeholder="i.e. Model/SKU" type="text"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Category</ion-label>
-    <ion-input placeholder="Car Parts" type="text"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Website</ion-label>
-    <ion-input placeholder="www.deloreanfluxcapacitor.com" type="text"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="stacked">Product Location</ion-label>
-    <ion-input placeholder="Address Line 1"></ion-input>
-    <ion-input placeholder="Address Line 2"></ion-input>
-    <ion-input placeholder="City"></ion-input>
-    <ion-input placeholder="State"></ion-input>
-    <ion-input placeholder="Zip Code"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Details</ion-label>
-    <ion-input placeholder="Travel in time" type="text"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="stacked">Full Info</ion-label>
-    <ion-textarea></ion-textarea>
-  </ion-item>
-  <ion-list>
-    <ion-item *ngIf="publiclyVisible == true">
-      <ion-label>Visible to Public?</ion-label>
-      <ion-button color="primary" size="default">Yes
-      </ion-button>
-      <ion-button color="light" size="default" (click)="changeVisibility(false)">No</ion-button>
+  <form role="form" [formGroup]="tagEdit" (ngSubmit)="editTag()">
+    <ion-button (click)="presentActionSheet()" expand="block" color="primary">Add Photo(s)</ion-button>
+    <!-- <ion-card class="create-tag-placeholder">
+      <ion-icon name="camera-outline"></ion-icon>
+      <ion-card-header>
+        <ion-card-subtitle>Add Photo(s)</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card> -->
+    <ion-item>
+      <ion-label position="floating">Title</ion-label>
+      <ion-input formControlName="tagTitle" placeholder="Flux Capacitor" type="text"></ion-input>
     </ion-item>
-    <ion-item *ngIf="publiclyVisible == false">
-      <ion-label>Visible to Public?</ion-label>
-      <ion-button color="light" size="default" (click)="changeVisibility(true)">Yes
-      </ion-button>
-      <ion-button color="primary" size="default">No</ion-button>
+    <ion-item>
+      <ion-label position="floating">Subtitle</ion-label>
+      <ion-input formControlName="tagSubTitle" placeholder="Rare Car Part" type="text"></ion-input>
     </ion-item>
-  </ion-list>
-  <ion-item></ion-item>
-  <ion-button expand="block" color="success">Create Tag</ion-button>
-  <ion-item></ion-item>
+    <ion-item>
+      <ion-label position="floating">Company</ion-label>
+      <ion-input formControlName="tagCompany" placeholder="DeLorean" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Price</ion-label>
+      <ion-input formControlName="tagPrice" placeholder="5000" type="text"></ion-input>
+    </ion-item>
+    <!-- <ion-item>
+      <ion-label position="floating">Product ID</ion-label>
+      <ion-input formControlName="firstName" placeholder="i.e. Model/SKU" type="text"></ion-input>
+    </ion-item> -->
+    <!-- <ion-item>
+      <ion-label position="floating">Category</ion-label>
+      <ion-input formControlName="firstName" placeholder="Car Parts" type="text"></ion-input>
+    </ion-item> -->
+    <ion-item>
+      <ion-label position="floating">Custom URL</ion-label>
+      <ion-input formControlName="tagUrl" placeholder="www.deloreanfluxcapacitor.com" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Product Location</ion-label>
+      <ion-input formControlName="tagAddress1" placeholder="Address Line 1"></ion-input>
+      <ion-input formControlName="tagAddress2" placeholder="Address Line 2"></ion-input>
+      <ion-input formControlName="tagCity" placeholder="City"></ion-input>
+      <ion-input formControlName="tagState" placeholder="State"></ion-input>
+      <ion-input formControlName="tagZip" placeholder="Zip Code"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Full Info</ion-label>
+      <ion-textarea formControlName="tagInfo" placeholder="Travel in time"></ion-textarea>
+    </ion-item>
+    <ion-list>
+      <ion-item *ngIf="publiclyVisible == true">
+        <ion-label>Visible to Public?</ion-label>
+        <ion-button color="primary" size="default">Yes
+        </ion-button>
+        <ion-button color="light" size="default" (click)="changeVisibility(false)">No</ion-button>
+      </ion-item>
+      <ion-item *ngIf="publiclyVisible == false">
+        <ion-label>Visible to Public?</ion-label>
+        <ion-button color="light" size="default" (click)="changeVisibility(true)">Yes
+        </ion-button>
+        <ion-button color="primary" size="default">No</ion-button>
+      </ion-item>
+    </ion-list>
+    <ion-item></ion-item>
+    <ion-button type="submit" expand="block" color="success">Create Tag</ion-button>
+    <ion-item></ion-item>
+  </form>
 </ion-content>

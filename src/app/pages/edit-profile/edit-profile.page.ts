@@ -170,7 +170,6 @@ export class EditProfilePage implements OnInit {
     const query = new Parse.Query(Agents);
     const agentId = localStorage.getItem('agentId');
     query.get(agentId).then((agent) => {
-      console.log(agent);
       const fullName = `${this.firstName} ${this.lastName}`;
       agent.set('agentDisplayName', fullName);
       agent.save().then((response) => {

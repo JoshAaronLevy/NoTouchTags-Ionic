@@ -6,6 +6,7 @@ import { parseResults } from 'src/shared/parseResults';
 import { getStoredUser } from 'src/shared/userHelper';
 import { ParseKey } from 'src/keys/parse.interface';
 import * as Parse from 'parse';
+import { storeTag } from 'src/shared/tagHelper';
 
 @Component({
   selector: 'app-my-tags',
@@ -65,6 +66,13 @@ export class MyTagsPage implements OnInit {
   routeToTagDetails(selectedTag) {
     this.selectedTag = selectedTag;
     console.log(this.selectedTag);
+  }
+
+  routeToEditTag(selectedTag) {
+    this.selectedTag = selectedTag;
+    storeTag(this.selectedTag);
+    localStorage.setItem('tagId', this.selectedTag.id);
+    this.router.navigate(['/create-tag']);
   }
 
   favoriteTag(selectedTag) {
