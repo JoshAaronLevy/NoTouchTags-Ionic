@@ -7,17 +7,20 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <form role="form" [formGroup]="userEdit" (ngSubmit)="editUser()">
+  <form *ngIf="displayUserForm" role="form" [formGroup]="userEdit" (ngSubmit)="editProfile()">
     <ion-item>
-      <ion-label>Application</ion-label>
-      <ion-select interface="popover">
-        <ion-select-option value="artGallery">Art Gallery</ion-select-option>
-        <ion-select-option value="realEstate">Real Estate</ion-select-option>
-        <ion-select-option value="showroom">Showroom</ion-select-option>
-        <ion-select-option value="wineTasting">Wine Tasting</ion-select-option>
-        <ion-select-option value="other">Other</ion-select-option>
-      </ion-select>
+      <ion-label position="floating">First Name</ion-label>
+      <ion-input formControlName="firstName" placeholder="Johnny" type="text"></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-label position="floating">Last Name</ion-label>
+      <ion-input formControlName="lastName" placeholder="Appleseed" type="text"></ion-input>
+    </ion-item>
+    <ion-item></ion-item>
+    <ion-button type="submit" expand="block" color="success">Save Profile</ion-button>
+    <ion-item></ion-item>
+  </form>
+  <form *ngIf="displayAgentForm" role="form" [formGroup]="agentEdit" (ngSubmit)="editProfile()">
     <ion-item>
       <ion-label position="floating">First Name</ion-label>
       <ion-input formControlName="firstName" placeholder="Johnny" type="text"></ion-input>
@@ -27,32 +30,37 @@
       <ion-input formControlName="lastName" placeholder="Appleseed" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input placeholder="johnny@appleseed.com" type="text"></ion-input>
-    </ion-item>
-    <ion-item>
       <ion-label position="floating">Phone Number</ion-label>
-      <ion-input placeholder="5551234567" type="number"></ion-input>
+      <ion-input formControlName="phone" placeholder="5551234567" type="number"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Company</ion-label>
-      <ion-input placeholder="Appleseed Apples" type="text"></ion-input>
+      <ion-input formControlName="company" placeholder="Appleseed Apples" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Website</ion-label>
-      <ion-input placeholder="www.appleseedapples.com" type="text"></ion-input>
+      <ion-input formControlName="website" placeholder="www.appleseedapples.com" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Address</ion-label>
-      <ion-input placeholder="Address Line 1"></ion-input>
-      <ion-input placeholder="Address Line 2"></ion-input>
-      <ion-input placeholder="City"></ion-input>
-      <ion-input placeholder="State"></ion-input>
-      <ion-input placeholder="Zip Code"></ion-input>
+      <ion-input formControlName="address1" placeholder="Address Line 1"></ion-input>
+      <ion-input formControlName="address2" placeholder="Address Line 2"></ion-input>
+      <ion-input formControlName="city" placeholder="City"></ion-input>
+      <ion-input formControlName="state" placeholder="State"></ion-input>
+      <ion-input formControlName="zip" placeholder="Zip Code"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">Details</ion-label>
-      <ion-textarea></ion-textarea>
+      <ion-label position="floating">Facebook</ion-label>
+      <ion-input formControlName="facebook" placeholder="https://facebook.com/johnny_appleseed" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">LinkedIn</ion-label>
+      <ion-input formControlName="linkedIn" placeholder="https://linkedin.com/in/johnny_appleseed" type="text">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">About Me</ion-label>
+      <ion-textarea formControlName="aboutMe"></ion-textarea>
     </ion-item>
     <ion-item></ion-item>
     <ion-button type="submit" expand="block" color="success">Save Profile</ion-button>
