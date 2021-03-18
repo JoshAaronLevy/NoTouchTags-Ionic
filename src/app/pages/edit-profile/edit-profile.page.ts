@@ -5,6 +5,7 @@ import { parseResult, parseResults } from 'src/shared/parseResults';
 import { ToastController } from '@ionic/angular';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { getStoredUser, storeUser } from 'src/shared/userHelper';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile',
@@ -39,10 +40,13 @@ export class EditProfilePage implements OnInit {
   agent: any;
   displayAgentForm: boolean;
   displayUserForm: boolean;
+  firstName: any;
+  lastName: any;
 
   constructor(
     private formBuilder: FormBuilder,
     public toastController: ToastController,
+    public router: Router
   ) {
     Parse.initialize(ParseKey.appId, ParseKey.javascript);
     Parse.serverURL = ParseKey.serverURL;
@@ -72,7 +76,6 @@ export class EditProfilePage implements OnInit {
     this.username = getStoredUser().username;
     query.equalTo('agentID', this.username);
     query.find().then((agent) => {
-      console.log(agent);
       if (agent) {
         this.isAgent = true;
       } else {
@@ -80,11 +83,11 @@ export class EditProfilePage implements OnInit {
       }
       this.agent = parseResults(agent);
       this.agent = this.agent[0];
-      console.log(this.agent);
+      localStorage.setItem('agentId', this.agent.id);
       this.formCheck();
     }, (error) => {
-      console.log(error);
       this.isAgent = false;
+      return error;
       // this.presentUserErrorToast(error);
     });
   }
@@ -133,8 +136,12 @@ export class EditProfilePage implements OnInit {
 
   editProfile() {
     if (this.isAgent === false) {
+      this.firstName = this.userEdit.value.firstName;
+      this.lastName = this.userEdit.value.lastName;
       this.editUser();
     } else {
+      this.firstName = this.agentEdit.value.firstName;
+      this.lastName = this.agentEdit.value.lastName;
       this.editUser();
       this.editAgent();
     }
@@ -144,16 +151,16 @@ export class EditProfilePage implements OnInit {
     const User = new Parse.User();
     const query = new Parse.Query(User);
     query.get(this.userId).then((user) => {
-      const fullName = `${this.userEdit.value.firstName} ${this.userEdit.value.lastName}`;
-      user.set('firstName', this.userEdit.value.firstName);
-      user.set('lastName', this.userEdit.value.lastName);
+      const fullName = `${this.firstName} ${this.lastName}`;
+      user.set('firstName', this.firstName);
+      user.set('lastName', this.lastName);
       user.set('fullname', fullName);
       user.set('fullname_lower', fullName.toLowerCase());
       user.save().then((response) => {
         storeUser(response);
         this.user = parseResult(response);
       }).catch((error) => {
-        console.error('Error while updating user', error);
+        this.presentUserErrorToast(error);
       });
     });
   }
@@ -161,18 +168,28 @@ export class EditProfilePage implements OnInit {
   editAgent() {
     const Agents = Parse.Object.extend('Agents');
     const query = new Parse.Query(Agents);
-    query.find().then((agent) => {
-      const fullName = `${this.userEdit.value.firstName} ${this.userEdit.value.lastName}`;
-      agent.set('firstName', this.userEdit.value.firstName);
-      agent.set('lastName', this.userEdit.value.lastName);
-      agent.set('fullname', fullName);
-      agent.set('fullname_lower', fullName.toLowerCase());
+    const agentId = localStorage.getItem('agentId');
+    query.get(agentId).then((agent) => {
+      console.log(agent);
+      const fullName = `${this.firstName} ${this.lastName}`;
+      agent.set('agentDisplayName', fullName);
       agent.save().then((response) => {
-        storeUser(response);
-        this.agent = parseResult(response);
+        this.presentUserSuccessToast();
+        // this.router.navigate(['/settings']);
+        return response;
       }).catch((error) => {
-        console.error('Error while updating user', error);
+        this.presentUserErrorToast(error);
       });
     });
+  }
+
+  async presentUserSuccessToast() {
+    const toast = await this.toastController.create({
+      message: 'Updated successfully!',
+      position: 'top',
+      color: 'success',
+      duration: 4000
+    });
+    toast.present();
   }
 }
