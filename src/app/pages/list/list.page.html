@@ -6,6 +6,12 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <!-- <ion-searchbar *ngIf="!loading" showCancelButton="never" animated></ion-searchbar> -->
   <ng-container *ngIf="!loading">
+    <div *ngIf="tags.length < 1" class="no-tags-container">
+      <ion-button (click)="routeToScan()" class="ion-margin-top ion-margin-bottom" size="large" expand="block"
+        shape="round" color="danger">
+        Scan Tag
+      </ion-button>
+    </div>
     <ion-item-sliding *ngFor="let tag of tags">
       <ion-item-options side="start">
         <ion-item-option color="danger" (click)="removeTag(tag)">Remove</ion-item-option>
