@@ -138,6 +138,10 @@ export class ProfilePage implements OnInit {
     this.router.navigate(['/tags']);
   }
 
+  routeToScan() {
+    this.router.navigate(['/scan-nfc-tag']);
+  }
+
   routeToSettings() {
     this.router.navigate(['/settings']);
   }

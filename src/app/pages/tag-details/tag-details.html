@@ -1,36 +1,26 @@
 <ion-header class="ion-no-border ion-padding" mode="md">
   <ion-toolbar mode="md">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home" mode="md"></ion-back-button>
+      <ion-back-button defaultHref="tags" mode="md"></ion-back-button>
     </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+    <ion-title>Tag Details</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
-
   <ion-slides class="gallery" Sclass="ion-padding-top" pager="true">
     <ion-slide class="ion-margin-bottom" *ngFor="let image of images">
       <img [src]="image.image">
     </ion-slide>
   </ion-slides>
-
   <div class="ion-padding">
-
     <div class="title">
       <img [src]="product.logo">
       <h1>{{product.name}}</h1>
       <h2>${{product.price}}</h2>
     </div>
-
     <ion-item lines="none">
       <p><strong>Size</strong></p>
     </ion-item>
-
     <ion-slides pager="false" [options]="slideOpts">
       <ng-container *ngFor="let size of sizes">
         <ion-slide class="size-slide ion-margin-bottom" [ngStyle]="{'background' : size.selected === true ? 'var(--ion-color-dark)' : 'var(--ion-color-medium)',
@@ -39,29 +29,28 @@
         </ion-slide>
       </ng-container>
     </ion-slides>
-
     <ion-item lines="none">
       <p><strong>Description</strong></p>
     </ion-item>
     <ion-item lines="none" class="description">
-       Lorem ipsum dolor sit amet, consectetur adipiscing 
+      Lorem ipsum dolor sit amet, consectetur adipiscing
     </ion-item>
-
   </div>
-
 </ion-content>
-
-<ion-footer class="ion-padding">
-  <ion-grid>
-    <ion-row class="ion-align-items-center">
-      <ion-col size="3">
-        <ion-button fill="outline" size="medium" color="primary" mode="ios">
-          <ion-icon color="primary" name="heart-outline"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col size="9">
-        <ion-button fill="solid" size="large" color="dark" shape="round" expand="block">Add to cart </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-footer class="tab-footer">
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button (click)="routeToTags()">
+        <ion-icon name="albums-outline"></ion-icon>
+        <ion-label>Tags</ion-label>
+      </ion-tab-button>
+      <ion-fab-button color="danger" (click)="routeToScan()">
+        <h4 class="scan-label">SCAN</h4>
+      </ion-fab-button>
+      <ion-tab-button (click)="routeToSettings()">
+        <ion-icon name="settings-outline"></ion-icon>
+        <ion-label>Settings</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-footer>

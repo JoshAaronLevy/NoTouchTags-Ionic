@@ -87,6 +87,10 @@ export class ListPage implements OnInit {
     this.router.navigate(['/tags']);
   }
 
+  routeToScan() {
+    this.router.navigate(['/scan-nfc-tag']);
+  }
+
   routeToSettings() {
     this.router.navigate(['/settings']);
   }
@@ -98,6 +102,7 @@ export class ListPage implements OnInit {
   routeToTagDetails(selectedTag) {
     this.selectedTag = selectedTag;
     console.log(this.selectedTag);
+    this.router.navigate(['/tag-details']);
   }
 
   favoriteTag(selectedTag) {

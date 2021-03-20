@@ -63,6 +63,18 @@ export class MyTagsPage implements OnInit {
     this.searchEnabled = true;
   }
 
+  routeToTags() {
+    this.router.navigate(['/tags']);
+  }
+
+  routeToScan() {
+    this.router.navigate(['/scan-nfc-tag']);
+  }
+
+  routeToSettings() {
+    this.router.navigate(['/settings']);
+  }
+
   routeToTagDetails(selectedTag) {
     this.selectedTag = selectedTag;
     console.log(this.selectedTag);

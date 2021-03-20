@@ -39,6 +39,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/my-tags/my-tags.module').then(m => m.MyTagsPageModule)
   },
   {
+    path: 'tag-details',
+    loadChildren: () => import('./pages/tag-details/tag-details.module').then(m => m.TagDetailsPageModule)
+  },
+  {
     path: 'create-tag',
     loadChildren: () => import('./pages/create-tag/create-tag.module').then(m => m.CreateTagPageModule)
   },

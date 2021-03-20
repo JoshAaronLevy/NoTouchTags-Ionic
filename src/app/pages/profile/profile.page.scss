@@ -68,27 +68,16 @@
   }
 }
 
-.scan-button-container {
-  display: flex;
-  justify-content: center;
-  position: fixed;
-  top: 91%;
-  height: 75px;
-  width: 100%;
-  z-index: 99999;
+ion-footer {
+  background: white;
 }
 
-.scan-button-container ion-fab-button {
-  height: 75px;
-  width: 75px;
+.tab-footer {
+  height: 57px;
 }
 
 h4.scan-label {
   font-size: 16px;
   font-weight: 700;
   margin: 0px;
-}
-
-.settings-label {
-  font-size: 16px !important;
 }

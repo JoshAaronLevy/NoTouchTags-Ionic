@@ -20,6 +20,7 @@ export class ScanNFCTagPage implements OnInit {
 
   async ngOnInit() {
     const flags = this.nfc.FLAG_READER_NFC_A || this.nfc.FLAG_READER_NFC_V;
+    // tslint:disable-next-line: deprecation
     this.readerMode$ = this.nfc.readerMode(flags).subscribe(
       tag => console.log(JSON.stringify(tag)),
       err => console.log('Error reading tag', err)
