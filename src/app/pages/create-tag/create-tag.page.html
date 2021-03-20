@@ -1,9 +1,10 @@
 <ion-header translucent>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/my-tags"></ion-back-button>
+      <ion-back-button [defaultHref]="[previousRoute]"></ion-back-button>
     </ion-buttons>
-    <ion-title>Create Tag</ion-title>
+    <ion-title *ngIf="method === 'create'">Create Tag</ion-title>
+    <ion-title *ngIf="method === 'edit'">Edit Tag</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>

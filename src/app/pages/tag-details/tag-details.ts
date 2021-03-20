@@ -31,6 +31,7 @@ export class TagDetailsPage implements OnInit {
     initialSlide: 0,
     speed: 500
   };
+  previousRoute: string;
 
 
   constructor(
@@ -38,6 +39,8 @@ export class TagDetailsPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.previousRoute = localStorage.getItem('previousRoute');
+    this.previousRoute = `/${this.previousRoute}`;
   }
 
   routeToTags() {

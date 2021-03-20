@@ -80,10 +80,18 @@ export class MyTagsPage implements OnInit {
     console.log(this.selectedTag);
   }
 
+  routeToCreateTag() {
+    localStorage.removeItem('previousRoute');
+    localStorage.setItem('previousRoute', 'profile');
+    localStorage.setItem('method', 'create');
+    this.router.navigate(['/create-tag']);
+  }
+
   routeToEditTag(selectedTag) {
     this.selectedTag = selectedTag;
     storeTag(this.selectedTag);
     localStorage.setItem('tagId', this.selectedTag.id);
+    localStorage.setItem('method', 'edit');
     this.router.navigate(['/create-tag']);
   }
 

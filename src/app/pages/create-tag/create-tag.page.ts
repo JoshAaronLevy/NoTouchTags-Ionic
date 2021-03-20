@@ -37,6 +37,7 @@ export class CreateTagPage implements OnInit {
   });
   tagId: string;
   tag: any;
+  method: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,14 +52,23 @@ export class CreateTagPage implements OnInit {
   }
 
   ngOnInit() {
+    if (localStorage.getItem('method') === 'create') {
+      this.method = 'create';
+    } else {
+      this.method = 'edit';
+    }
     this.publiclyVisible = true;
     this.previousRoute = localStorage.getItem('previousRoute');
     this.previousRoute = `/${this.previousRoute}`;
-    this.tagId = getStoredTag().id;
-    this.buildForm();
+    if (this.method === 'edit') {
+      this.tagId = getStoredTag().id;
+      this.buildEditForm();
+    } else {
+      this.buildCreateForm();
+    }
   }
 
-  buildForm() {
+  buildEditForm() {
     const Tags = Parse.Object.extend('Tags');
     const query = new Parse.Query(Tags);
     query.equalTo('objectId', this.tagId);
@@ -80,6 +90,22 @@ export class CreateTagPage implements OnInit {
       });
     }, (error) => {
       return this.presentTagErrorToast(error);
+    });
+  }
+
+  buildCreateForm() {
+    this.tagEdit = this.formBuilder.group({
+      tagTitle: '',
+      tagSubTitle: '',
+      tagCompany: '',
+      tagPrice: '',
+      tagUrl: '',
+      tagAddress1: '',
+      tagAddress2: '',
+      tagCity: '',
+      tagState: '',
+      tagZip: '',
+      tagInfo: ''
     });
   }
 

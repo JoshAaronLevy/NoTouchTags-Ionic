@@ -1,8 +1,27 @@
 <ion-header translucent>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="[previousRoute]"></ion-back-button>
+    </ion-buttons>
     <ion-title>Scan NFC Tag</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true" class="ion-padding">
 </ion-content>
+<ion-footer class="tab-footer">
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button (click)="routeToTags()">
+        <ion-icon name="albums-outline"></ion-icon>
+        <ion-label>Tags</ion-label>
+      </ion-tab-button>
+      <ion-fab-button color="medium">
+        <h4 class="scan-label">SCAN</h4>
+      </ion-fab-button>
+      <ion-tab-button (click)="routeToSettings()">
+        <ion-icon name="settings-outline"></ion-icon>
+        <ion-label>Settings</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-footer>

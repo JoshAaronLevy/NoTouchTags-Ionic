@@ -4,6 +4,7 @@ import { ActionSheetController, AlertController } from '@ionic/angular';
 import { ParseKey } from 'src/keys/parse.interface';
 import * as Parse from 'parse';
 import { clearUser } from 'src/shared/userHelper';
+import { storeTag } from 'src/shared/tagHelper';
 
 @Component({
   selector: 'app-profile',
@@ -12,6 +13,7 @@ import { clearUser } from 'src/shared/userHelper';
 })
 export class ProfilePage implements OnInit {
   theme: string;
+  selectedTag: any;
 
   constructor(
     public alertController: AlertController,
@@ -132,6 +134,13 @@ export class ProfilePage implements OnInit {
       ]
     });
     await actionSheet.present();
+  }
+
+  routeToCreateTag() {
+    localStorage.removeItem('previousRoute');
+    localStorage.setItem('previousRoute', 'profile');
+    localStorage.setItem('method', 'create');
+    this.router.navigate(['/create-tag']);
   }
 
   routeToTags() {

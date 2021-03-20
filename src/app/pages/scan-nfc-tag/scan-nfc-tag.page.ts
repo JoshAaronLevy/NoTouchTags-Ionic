@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NFC, Ndef } from '@ionic-native/nfc/ngx';
 
 @Component({
@@ -12,13 +13,17 @@ import { NFC, Ndef } from '@ionic-native/nfc/ngx';
 })
 export class ScanNFCTagPage implements OnInit {
   readerMode$: any;
+  previousRoute: string;
 
   constructor(
     private nfc: NFC,
-    private ndef: Ndef
+    private ndef: Ndef,
+    public router: Router
   ) { }
 
   async ngOnInit() {
+    this.previousRoute = localStorage.getItem('previousRoute');
+    this.previousRoute = `/${this.previousRoute}`;
     const flags = this.nfc.FLAG_READER_NFC_A || this.nfc.FLAG_READER_NFC_V;
     // tslint:disable-next-line: deprecation
     this.readerMode$ = this.nfc.readerMode(flags).subscribe(
@@ -34,5 +39,13 @@ export class ScanNFCTagPage implements OnInit {
     } catch (err) {
       console.log('Error reading tag', err);
     }
+  }
+
+  routeToTags() {
+    this.router.navigate(['/tags']);
+  }
+
+  routeToSettings() {
+    this.router.navigate(['/settings']);
   }
 }

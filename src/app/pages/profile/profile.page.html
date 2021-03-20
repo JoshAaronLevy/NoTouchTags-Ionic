@@ -24,26 +24,26 @@
     <ion-item button routerLink="/my-tags" (click)="setPrevious()">
       <ion-icon slot="start" name="albums-outline"></ion-icon>
       <ion-label>
-        <h3>Add/Edit NFC Tags</h3>
+        <h3>View My NFC Tags</h3>
       </ion-label>
     </ion-item>
   </ion-list>
   <ion-list>
-    <ion-item button routerLink="/my-tags" (click)="setPrevious()">
-      <ion-icon slot="start" name="qr-code-outline"></ion-icon>
+    <ion-item button routerLink="/create-tag" (click)="routeToCreateTag()">
+      <ion-icon slot="start" name="duplicate-outline"></ion-icon>
       <ion-label>
-        <h3>Add/Edit QR Codes</h3>
+        <h3>Add New NFC Tag</h3>
       </ion-label>
     </ion-item>
   </ion-list>
-  <ion-list>
+  <!-- <ion-list>
     <ion-item button onclick="showDetail('Contact')">
       <ion-icon slot="start" name="mail-outline"></ion-icon>
       <ion-label>
         <h3>Contact Us</h3>
       </ion-label>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
   <ion-list>
     <ion-item button (click)="presentSignOutConfirm()">
       <ion-icon slot="start" name="log-out-outline"></ion-icon>
@@ -63,9 +63,9 @@
       <ion-fab-button color="danger" (click)="routeToScan()">
         <h4 class="scan-label">SCAN</h4>
       </ion-fab-button>
-      <ion-tab-button (click)="routeToSettings()">
-        <ion-icon name="settings-outline"></ion-icon>
-        <ion-label>Settings</ion-label>
+      <ion-tab-button>
+        <ion-icon name="settings-outline" color="primary"></ion-icon>
+        <ion-label color="primary">Settings</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
