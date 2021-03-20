@@ -101,9 +101,9 @@ export class ListPage implements OnInit {
 
   routeToTagDetails(selectedTag) {
     this.selectedTag = selectedTag;
-    console.log(this.selectedTag);
     localStorage.removeItem('previousRoute');
     localStorage.setItem('previousRoute', 'tags');
+    localStorage.setItem('selectedTagId', this.selectedTag.id);
     this.router.navigate(['/tag-details']);
   }
 

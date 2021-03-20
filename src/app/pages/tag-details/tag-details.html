@@ -4,36 +4,35 @@
       <ion-back-button [defaultHref]="[previousRoute]" mode="md"></ion-back-button>
     </ion-buttons>
     <ion-title>Tag Details</ion-title>
+    <ion-buttons *ngIf="editEnabled" slot="end">
+      <ion-button (click)="routeToEditTag()" color="success">Edit Tag</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
-  <ion-slides class="gallery" Sclass="ion-padding-top" pager="true">
-    <ion-slide class="ion-margin-bottom" *ngFor="let image of images">
-      <img [src]="image.image">
+<ion-content [fullscreen]="true" *ngIf="!loading">
+  <ion-slides class="gallery" Sclass="ion-padding-top" pager="false">
+    <ion-slide class="ion-margin-bottom">
+      <ion-img [src]="selectedTag.imageUrl"></ion-img>
     </ion-slide>
   </ion-slides>
-  <div class="ion-padding">
+  <!-- <ion-slides pager="false" [options]="slideOpts">
+    <ng-container *ngFor="let image of images">
+      <ion-slide class="size-slide">
+        <ion-img [src]="image.url"></ion-img>
+      </ion-slide>
+    </ng-container>
+  </ion-slides> -->
+  <div>
     <div class="title">
-      <img [src]="product.logo">
-      <h1>{{product.name}}</h1>
-      <h2>${{product.price}}</h2>
+      <h1>{{ selectedTag.tagTitle }}</h1>
+      <h2>{{ selectedTag.tagSubTitle }}</h2>
+      <h2>${{ selectedTag.tagPrice }}</h2>
     </div>
-    <ion-item lines="none">
-      <p><strong>Size</strong></p>
-    </ion-item>
-    <ion-slides pager="false" [options]="slideOpts">
-      <ng-container *ngFor="let size of sizes">
-        <ion-slide class="size-slide ion-margin-bottom" [ngStyle]="{'background' : size.selected === true ? 'var(--ion-color-dark)' : 'var(--ion-color-medium)',
-        'color' : size.selected === true ? 'white' : 'var(--ion-color-dark)' }">
-          {{size.number}}
-        </ion-slide>
-      </ng-container>
-    </ion-slides>
     <ion-item lines="none">
       <p><strong>Description</strong></p>
     </ion-item>
     <ion-item lines="none" class="description">
-      Lorem ipsum dolor sit amet, consectetur adipiscing
+      <p class="tag-description">{{ selectedTag.tagInfo }}</p>
     </ion-item>
   </div>
 </ion-content>

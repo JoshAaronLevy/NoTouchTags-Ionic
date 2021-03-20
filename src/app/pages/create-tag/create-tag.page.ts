@@ -38,6 +38,7 @@ export class CreateTagPage implements OnInit {
   tagId: string;
   tag: any;
   method: string;
+  loading: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -52,6 +53,7 @@ export class CreateTagPage implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = true;
     if (localStorage.getItem('method') === 'create') {
       this.method = 'create';
     } else {
@@ -88,7 +90,10 @@ export class CreateTagPage implements OnInit {
         tagZip: this.tag.tagZip,
         tagInfo: this.tag.tagInfo
       });
+      this.tag.imageUrl = `https://photos.homecards.com/rebeacons/Tag-${this.tag.tagPhotoRef}-1.jpg`;
+      this.loading = false;
     }, (error) => {
+      this.loading = false;
       return this.presentTagErrorToast(error);
     });
   }
@@ -107,6 +112,7 @@ export class CreateTagPage implements OnInit {
       tagZip: '',
       tagInfo: ''
     });
+    this.loading = false;
   }
 
   async takePhoto() {

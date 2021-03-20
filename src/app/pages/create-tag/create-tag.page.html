@@ -8,8 +8,16 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <form role="form" [formGroup]="tagEdit" (ngSubmit)="editTag()">
-    <ion-button (click)="presentActionSheet()" expand="block" color="primary">Add Photo(s)</ion-button>
+  <form *ngIf="!loading" role="form" [formGroup]="tagEdit" (ngSubmit)="editTag()">
+    <ion-button *ngIf="method === 'create'" (click)="presentActionSheet()" expand="block" color="primary">Add Photo
+    </ion-button>
+    <ion-slides *ngIf="method === 'edit'" class="gallery" Sclass="ion-padding-top" pager="false">
+      <ion-slide class="ion-margin-bottom">
+        <ion-img [src]="tag.imageUrl"></ion-img>
+      </ion-slide>
+    </ion-slides>
+    <ion-button *ngIf="method === 'edit'" (click)="presentActionSheet()" expand="block" color="primary">Change Photo
+    </ion-button>
     <!-- <ion-card class="create-tag-placeholder">
       <ion-icon name="camera-outline"></ion-icon>
       <ion-card-header>
@@ -71,7 +79,8 @@
       </ion-item>
     </ion-list>
     <ion-item></ion-item>
-    <ion-button type="submit" expand="block" color="success">Create Tag</ion-button>
+    <ion-button *ngIf="method === 'create'" type="submit" expand="block" color="success">Create Tag</ion-button>
+    <ion-button *ngIf="method === 'edit'" type="submit" expand="block" color="success">Edit Tag</ion-button>
     <ion-item></ion-item>
   </form>
 </ion-content>
