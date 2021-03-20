@@ -16,12 +16,12 @@ export class CameraPage implements OnInit {
   async ngOnInit() {
     this.previousRoute = localStorage.getItem('previousRoute');
     this.previousRoute = `/${this.previousRoute}`;
-    await this.photoService.loadSaved();
-    await this.photoService.addNewToGallery();
+    // await this.photoService.loadSaved();
+    // await this.photoService.addNewToGallery();
     this.addPhotoToGallery();
   }
 
   addPhotoToGallery() {
-    this.photoService.addNewToGallery();
+    // this.photoService.addNewToGallery();
   }
 }
