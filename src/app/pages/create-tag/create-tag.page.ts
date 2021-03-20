@@ -9,6 +9,11 @@ import { Chooser } from '@ionic-native/chooser/ngx';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { parseResults } from 'src/shared/parseResults';
 import { getStoredTag } from 'src/shared/tagHelper';
+import { v4 as uuid } from 'uuid';
+import { Plugins, CameraResultType } from '@capacitor/core';
+import { profile } from 'console';
+
+const { Camera } = Plugins;
 
 @Component({
   selector: 'app-create-tag',
@@ -39,6 +44,8 @@ export class CreateTagPage implements OnInit {
   tag: any;
   method: string;
   loading: boolean;
+  uniqueId: string;
+  picture: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -46,6 +53,7 @@ export class CreateTagPage implements OnInit {
     public router: Router,
     public actionSheetController: ActionSheetController,
     private fileChooser: FileChooser,
+    private chooser: Chooser,
     public toastController: ToastController
   ) {
     Parse.initialize(ParseKey.appId, ParseKey.javascript);
@@ -64,8 +72,10 @@ export class CreateTagPage implements OnInit {
     this.previousRoute = `/${this.previousRoute}`;
     if (this.method === 'edit') {
       this.tagId = getStoredTag().id;
+      this.uniqueId = this.tagId;
       this.buildEditForm();
     } else {
+      this.uniqueId = uuid().toString();
       this.buildCreateForm();
     }
   }
@@ -115,17 +125,35 @@ export class CreateTagPage implements OnInit {
     this.loading = false;
   }
 
-  async takePhoto() {
-    await this.photoService.addNewToGallery();
+  requestAccess() {
+    this.photoService.requestAccess();
+  }
+
+  async takePicture() {
+    try {
+      const profilePicture = await Camera.getPhoto({
+        quality: 100,
+        allowEditing: true,
+        resultType: CameraResultType.Base64,
+        width: 800,
+        height: 800
+      });
+      profilePicture.format = 'jpeg';
+      this.picture = profilePicture.base64String;
+      console.log(profilePicture);
+      this.photoService.create(profilePicture);
+    } catch (error) {
+      return this.presentPhotoErrorToast(error);
+    }
   }
 
   choosePhoto() {
-    this.fileChooser.open()
-      .then(uri => console.log(uri))
-      .catch(e => console.log(e));
-    // this.chooser.getFile()
-    //   .then(file => console.log(file ? file.name : 'canceled'))
-    //   .catch((error: any) => console.error(error));
+    // this.fileChooser.open()
+    //   .then(uri => console.log(uri))
+    //   .catch(e => console.log(e));
+    this.chooser.getFile()
+      .then(file => console.log(file ? file.name : 'canceled'))
+      .catch((error: any) => console.error(error));
   }
 
   changeVisibility(val) {
@@ -145,7 +173,8 @@ export class CreateTagPage implements OnInit {
           text: 'Camera',
           icon: 'camera-outline',
           handler: () => {
-            this.takePhoto();
+            // this.requestAccess();
+            this.takePicture();
           }
         }, {
           text: 'Photo Library',
@@ -195,6 +224,16 @@ export class CreateTagPage implements OnInit {
   }
 
   async presentTagErrorToast(error) {
+    const toast = await this.toastController.create({
+      message: error,
+      position: 'top',
+      color: 'danger',
+      duration: 5000
+    });
+    toast.present();
+  }
+
+  async presentPhotoErrorToast(error) {
     const toast = await this.toastController.create({
       message: error,
       position: 'top',

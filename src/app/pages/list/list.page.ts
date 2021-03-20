@@ -26,6 +26,7 @@ export class ListPage implements OnInit {
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
   ];
   username: string;
+  uniqueId: any;
 
   constructor(
     public router: Router,
