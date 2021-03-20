@@ -20,7 +20,7 @@
       </ion-label>
     </ion-item>
   </ion-list>
-  <ion-list>
+  <ion-list *ngIf="isAgent">
     <ion-item button routerLink="/my-tags" (click)="setPrevious()">
       <ion-icon slot="start" name="albums-outline"></ion-icon>
       <ion-label>
@@ -28,7 +28,7 @@
       </ion-label>
     </ion-item>
   </ion-list>
-  <ion-list>
+  <ion-list *ngIf="isAgent">
     <ion-item button routerLink="/create-tag" (click)="routeToCreateTag()">
       <ion-icon slot="start" name="duplicate-outline"></ion-icon>
       <ion-label>

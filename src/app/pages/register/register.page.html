@@ -16,28 +16,54 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
   <div class="ion-padding-end">
-    <ion-item class="ion-margin-top">
-      <ion-input mode="md" type="text" placeholder="Name"></ion-input>
-    </ion-item>
-    <ion-item class="ion-margin-top">
-      <ion-input mode="md" type="email" placeholder="Email"></ion-input>
-    </ion-item>
-    <ion-item class="ion-margin-top">
-      <ion-input mode="md" type="password" placeholder="Password"></ion-input>
-    </ion-item>
-  </div>
-
-  <div class="ion-text-center ion-margin-top ion-padding">
-    <ion-button routerLink="/tags" class="ion-margin-top ion-margin-bottom" size="large" expand="block" shape="round"
-      color="primary">
-      Sign Up
-    </ion-button>
+    <form role="form" [formGroup]="userSignup" (ngSubmit)="signup()">
+      <ion-item class="ion-margin-top">
+        <ion-input formControlName="firstName" mode="md" type="text" placeholder="First Name"></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin-top">
+        <ion-input formControlName="lastName" mode="md" type="text" placeholder="Last Name"></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin-top">
+        <ion-input formControlName="email" mode="md" type="email" placeholder="Email *"></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin-top">
+        <ion-input formControlName="password" mode="md" type="password" placeholder="Password *"></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin-top owner-container" *ngIf="isAgent === 'NO'">
+        <div class="owner-label">
+          <strong (click)="ownerManagerHelp()">
+            Tag Manager
+            <ion-icon class="help-icon" name="help-circle-outline" color="primary"></ion-icon>
+          </strong>
+        </div>
+        <div class="owner-buttons" slot="end">
+          <ion-button color="primary" size="default">No</ion-button>
+          <ion-button color="light" size="default" (click)="changeOwnership('YES')">Yes</ion-button>
+        </div>
+      </ion-item>
+      <ion-item class="ion-margin-top owner-container" *ngIf="isAgent === 'YES'">
+        <div class="owner-label">
+          <strong (click)="ownerManagerHelp()">
+            Tag Manager
+            <ion-icon class="help-icon" name="help-circle-outline" color="primary"></ion-icon>
+          </strong>
+        </div>
+        <div class="owner-buttons" slot="end">
+          <ion-button color="light" size="default" (click)="changeOwnership('NO')">No</ion-button>
+          <ion-button color="primary" size="default">Yes</ion-button>
+        </div>
+      </ion-item>
+      <div class="ion-text-center ion-margin-top ion-padding">
+        <ion-button type="submit" class="ion-margin-top ion-margin-bottom" size="large" expand="block" shape="round"
+          color="primary">
+          Sign Up
+        </ion-button>
+      </div>
+    </form>
     <ion-button (click)="AppleSignIn()" color="dark" size="large" expand="full" shape="round" class="apple-login">
       <ion-icon expand="full" name="logo-apple" slot="start"></ion-icon>
       Sign In with Apple
     </ion-button>
   </div>
-
 </ion-content>

@@ -14,6 +14,7 @@ import { storeTag } from 'src/shared/tagHelper';
 export class ProfilePage implements OnInit {
   theme: string;
   selectedTag: any;
+  isAgent: boolean;
 
   constructor(
     public alertController: AlertController,
@@ -25,6 +26,11 @@ export class ProfilePage implements OnInit {
   }
 
   ngOnInit() {
+    if (localStorage.getItem('isAgent') === 'YES') {
+      this.isAgent = true;
+    } else {
+      this.isAgent = false;
+    }
     if (localStorage.getItem('theme') === 'dark') {
       this.theme = 'dark';
       this.enableDarkTheme();

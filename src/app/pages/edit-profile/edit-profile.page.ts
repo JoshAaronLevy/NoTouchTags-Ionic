@@ -22,7 +22,8 @@ export class EditProfilePage implements OnInit {
   agentEdit: FormGroup = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
-    phone: new FormControl(''),
+    mainPhone: new FormControl(''),
+    mobilePhone: new FormControl(''),
     company: new FormControl(''),
     website: new FormControl(''),
     address1: new FormControl(''),
@@ -54,6 +55,11 @@ export class EditProfilePage implements OnInit {
 
   ngOnInit() {
     this.checkUser();
+    if (localStorage.getItem('isAgent') === 'YES') {
+      this.isAgent = true;
+    } else {
+      this.isAgent = false;
+    }
     this.previousRoute = localStorage.getItem('previousRoute');
     this.previousRoute = `/${this.previousRoute}`;
   }
@@ -64,7 +70,11 @@ export class EditProfilePage implements OnInit {
     this.userId = getStoredUser().userId;
     query.get(this.userId).then((user) => {
       this.user = parseResult(user);
-      this.checkAgent();
+      if (this.isAgent === true) {
+        this.checkAgent();
+      } else {
+        this.userForm();
+      }
     }, (error) => {
       this.presentUserErrorToast(error);
     });
@@ -76,15 +86,14 @@ export class EditProfilePage implements OnInit {
     this.username = getStoredUser().username;
     query.equalTo('agentID', this.username);
     query.find().then((agent) => {
-      if (agent) {
-        this.isAgent = true;
+      if (agent.length > 0) {
+        this.agent = parseResults(agent);
+        this.agent = this.agent[0];
+        localStorage.setItem('agentId', this.agent.id);
+        this.agentForm();
       } else {
         this.isAgent = false;
       }
-      this.agent = parseResults(agent);
-      this.agent = this.agent[0];
-      localStorage.setItem('agentId', this.agent.id);
-      this.formCheck();
     }, (error) => {
       this.isAgent = false;
       return error;
@@ -92,36 +101,37 @@ export class EditProfilePage implements OnInit {
     });
   }
 
-  formCheck() {
-    if (this.isAgent === true) {
-      this.displayAgentForm = true;
-      this.displayUserForm = false;
-      const splitName = this.agent.agentDisplayName.split(' ');
-      const agentFirstName = splitName[0];
-      const agentLastName = splitName[1];
-      this.agentEdit = this.formBuilder.group({
-        firstName: agentFirstName,
-        lastName: agentLastName,
-        phone: this.agent.agentPhoneMain,
-        company: this.agent.agentOfficeName,
-        website: this.agent.website,
-        address1: this.agent.agentAddress,
-        address2: this.agent.agentAddress2,
-        city: this.agent.agentCity,
-        state: this.agent.agentState,
-        zip: this.agent.agentZip,
-        facebook: this.agent.facebook,
-        linkedIn: this.agent.linkedIn,
-        aboutMe: this.agent.agentAboutMe
-      });
-    } else {
-      this.displayAgentForm = false;
-      this.displayUserForm = true;
-      this.userEdit = this.formBuilder.group({
-        firstName: this.user.firstName,
-        lastName: this.user.lastName
-      });
-    }
+  agentForm() {
+    this.displayAgentForm = true;
+    this.displayUserForm = false;
+    const splitName = this.agent.agentDisplayName.split(' ');
+    const agentFirstName = splitName[0];
+    const agentLastName = splitName[1];
+    this.agentEdit = this.formBuilder.group({
+      firstName: agentFirstName,
+      lastName: agentLastName,
+      mainPhone: this.agent.agentPhoneMain,
+      mobilePhone: this.agent.agentPhoneMobile,
+      company: this.agent.agentOfficeName,
+      website: this.agent.website,
+      address1: this.agent.agentAddress,
+      address2: this.agent.agentAddress2,
+      city: this.agent.agentCity,
+      state: this.agent.agentState,
+      zip: this.agent.agentZip,
+      facebook: this.agent.facebook,
+      linkedIn: this.agent.linkedIn,
+      aboutMe: this.agent.agentAboutMe
+    });
+  }
+
+  userForm() {
+    this.displayAgentForm = false;
+    this.displayUserForm = true;
+    this.userEdit = this.formBuilder.group({
+      firstName: this.user.firstName,
+      lastName: this.user.lastName
+    });
   }
 
   async presentUserErrorToast(error) {
@@ -171,7 +181,21 @@ export class EditProfilePage implements OnInit {
     const agentId = localStorage.getItem('agentId');
     query.get(agentId).then((agent) => {
       const fullName = `${this.firstName} ${this.lastName}`;
+      agent.set('firstName', this.firstName);
+      agent.set('lastName', this.lastName);
       agent.set('agentDisplayName', fullName);
+      agent.set('agentPhoneMain', this.agentEdit.value.mainPhone);
+      agent.set('agentPhoneMobile', this.agentEdit.value.mobilePhone);
+      agent.set('agentOfficeName', this.agentEdit.value.company);
+      agent.set('website', this.agentEdit.value.website);
+      agent.set('agentAddress', this.agentEdit.value.address1);
+      agent.set('agentAddress2', this.agentEdit.value.address2);
+      agent.set('agentCity', this.agentEdit.value.city);
+      agent.set('agentState', this.agentEdit.value.state);
+      agent.set('agentZip', this.agentEdit.value.zip);
+      agent.set('faceBook', this.agentEdit.value.facebook);
+      agent.set('linkedIn', this.agentEdit.value.linkedIn);
+      agent.set('agentAboutMe', this.agentEdit.value.aboutMe);
       agent.save().then((response) => {
         this.presentUserSuccessToast();
         // this.router.navigate(['/settings']);
