@@ -11,7 +11,7 @@ import { parseResults } from 'src/shared/parseResults';
 import { getStoredTag } from 'src/shared/tagHelper';
 import { v4 as uuid } from 'uuid';
 import { Plugins, CameraResultType } from '@capacitor/core';
-import { profile } from 'console';
+// import { profile } from 'console';
 
 const { Camera } = Plugins;
 
