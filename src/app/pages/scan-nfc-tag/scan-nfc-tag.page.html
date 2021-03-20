@@ -15,7 +15,10 @@
         <ion-icon name="albums-outline"></ion-icon>
         <ion-label>Tags</ion-label>
       </ion-tab-button>
-      <ion-fab-button color="medium">
+      <ion-fab-button *ngIf="theme === 'light'" color="light">
+        <h4 class="scan-label">SCAN</h4>
+      </ion-fab-button>
+      <ion-fab-button *ngIf="theme === 'dark'" color="medium">
         <h4 class="scan-label">SCAN</h4>
       </ion-fab-button>
       <ion-tab-button (click)="routeToSettings()">

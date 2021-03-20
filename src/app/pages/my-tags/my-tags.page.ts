@@ -38,10 +38,7 @@ export class MyTagsPage implements OnInit {
 
   ngOnInit() {
     this.username = getStoredUser().username;
-    if (localStorage.getItem('previousRoute') === 'my-tags') {
-      localStorage.setItem('previousRoute', 'settings');
-      this.previousRoute = 'settings';
-    }
+    this.previousRoute = localStorage.getItem('previousRoute');
     this.searchEnabled = false;
     this.loading = true;
     const Tags = Parse.Object.extend('Tags');
@@ -89,7 +86,7 @@ export class MyTagsPage implements OnInit {
 
   routeToCreateTag() {
     localStorage.removeItem('previousRoute');
-    localStorage.setItem('previousRoute', 'profile');
+    localStorage.setItem('previousRoute', 'my-tags');
     localStorage.setItem('method', 'create');
     localStorage.setItem('previousRoute', 'my-tags');
     this.router.navigate(['/create-tag']);

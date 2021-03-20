@@ -11,7 +11,7 @@
 </ion-header>
 <ion-content [fullscreen]="true" class="ion-padding">
   <ng-container *ngIf="!loading">
-    <ion-item-sliding *ngFor="let tag of tags">
+    <ion-item-sliding class="sliding-list-item" *ngFor="let tag of tags">
       <ion-item-options side="start">
         <ion-item-option color="danger" (click)="removeTag(tag)">Remove</ion-item-option>
       </ion-item-options>

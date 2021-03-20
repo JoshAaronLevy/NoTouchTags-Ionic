@@ -57,7 +57,7 @@ export class ProfilePage implements OnInit {
 
   setPrevious() {
     localStorage.removeItem('previousRoute');
-    localStorage.setItem('previousRoute', 'profile');
+    localStorage.setItem('previousRoute', 'settings');
   }
 
   showDetail(title) {
@@ -144,7 +144,7 @@ export class ProfilePage implements OnInit {
 
   routeToCreateTag() {
     localStorage.removeItem('previousRoute');
-    localStorage.setItem('previousRoute', 'profile');
+    localStorage.setItem('previousRoute', 'settings');
     localStorage.setItem('method', 'create');
     this.router.navigate(['/create-tag']);
   }
@@ -154,10 +154,8 @@ export class ProfilePage implements OnInit {
   }
 
   routeToScan() {
+    localStorage.removeItem('previousRoute');
+    localStorage.setItem('previousRoute', 'settings');
     this.router.navigate(['/scan-nfc-tag']);
-  }
-
-  routeToSettings() {
-    this.router.navigate(['/settings']);
   }
 }

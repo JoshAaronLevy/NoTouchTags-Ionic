@@ -14,6 +14,7 @@ import { NFC, Ndef } from '@ionic-native/nfc/ngx';
 export class ScanNFCTagPage implements OnInit {
   readerMode$: any;
   previousRoute: string;
+  theme: string;
 
   constructor(
     private nfc: NFC,
@@ -22,14 +23,22 @@ export class ScanNFCTagPage implements OnInit {
   ) { }
 
   async ngOnInit() {
+    if (localStorage.getItem('theme') === 'light') {
+      this.theme = 'light';
+    } else {
+      this.theme = 'dark';
+    }
     this.previousRoute = localStorage.getItem('previousRoute');
     this.previousRoute = `/${this.previousRoute}`;
     const flags = this.nfc.FLAG_READER_NFC_A || this.nfc.FLAG_READER_NFC_V;
     // tslint:disable-next-line: deprecation
-    this.readerMode$ = this.nfc.readerMode(flags).subscribe(
-      tag => console.log(JSON.stringify(tag)),
-      err => console.log('Error reading tag', err)
-    );
+    this.readerMode$ = this.nfc.readerMode(flags).subscribe(tag => {
+      console.log(JSON.stringify(tag));
+    });
+    // this.readerMode$ = this.nfc.readerMode(flags).subscribe(
+    //   tag => console.log(JSON.stringify(tag)),
+    //   err => console.log('Error reading tag', err)
+    // );
 
     // Read NFC Tag - iOS
     // On iOS, a NFC reader session takes control from your app while scanning tags then returns a tag

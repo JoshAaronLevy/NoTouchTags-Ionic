@@ -25,10 +25,15 @@
         <ion-input formControlName="lastName" mode="md" type="text" placeholder="Last Name"></ion-input>
       </ion-item>
       <ion-item class="ion-margin-top">
-        <ion-input formControlName="email" mode="md" type="email" placeholder="Email *"></ion-input>
+        <ion-input formControlName="email" mode="md" type="email" placeholder="Email *" required></ion-input>
       </ion-item>
       <ion-item class="ion-margin-top">
-        <ion-input formControlName="password" mode="md" type="password" placeholder="Password *"></ion-input>
+        <ion-input formControlName="password" mode="md" type="password" placeholder="Password *" required></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin-top">
+        <ion-input formControlName="passwordConfirm" mode="md" type="password" placeholder="Confirm Password *"
+          required>
+        </ion-input>
       </ion-item>
       <ion-item class="ion-margin-top owner-container" *ngIf="isAgent === 'NO'">
         <div class="owner-label">
@@ -55,7 +60,9 @@
         </div>
       </ion-item>
       <div class="ion-text-center ion-margin-top ion-padding">
-        <ion-button type="submit" class="ion-margin-top ion-margin-bottom" size="large" expand="block" shape="round"
+        <ion-button
+          [disabled]="userSignup.value.email.length < 5 || userSignup.value.password.length < 3 || userSignup.value.passwordConfirm !== userSignup.value.password"
+          type="submit" class="ion-margin-top ion-margin-bottom" size="large" expand="block" shape="round"
           color="primary">
           Sign Up
         </ion-button>

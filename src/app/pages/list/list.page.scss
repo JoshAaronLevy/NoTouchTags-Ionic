@@ -2,7 +2,12 @@ ion-header {
   background: white;
 }
 
+.sliding-list-item {
+  margin-bottom: 15px !important;
+}
+
 .product {
+  margin-bottom: 0px !important;
   ion-thumbnail {
     background: var(--ion-color-medium);
     border-radius: 0px;

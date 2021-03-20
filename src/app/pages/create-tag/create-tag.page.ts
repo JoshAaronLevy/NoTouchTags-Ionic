@@ -148,9 +148,6 @@ export class CreateTagPage implements OnInit {
   }
 
   choosePhoto() {
-    // this.fileChooser.open()
-    //   .then(uri => console.log(uri))
-    //   .catch(e => console.log(e));
     this.chooser.getFile()
       .then(file => console.log(file ? file.name : 'canceled'))
       .catch((error: any) => console.error(error));

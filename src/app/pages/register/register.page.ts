@@ -25,6 +25,7 @@ export class RegisterPage implements OnInit {
   userSignup: FormGroup;
   isAgent: string;
   userPointer: any;
+  passwordConfirmed: boolean;
 
   constructor(
     private platform: Platform,
@@ -49,7 +50,8 @@ export class RegisterPage implements OnInit {
       firstName: '',
       lastName: '',
       email: '',
-      password: ''
+      password: '',
+      passwordConfirm: ''
     });
   }
 
