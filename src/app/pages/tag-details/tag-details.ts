@@ -67,7 +67,7 @@ export class TagDetailsPage implements OnInit {
             url: this.selectedTag.imageUrl
           }
         );
-        if (this.selectedTag.tagPrice.startsWith('#') === true) {
+        if (this.selectedTag.tagPrice.startsWith('#') === true || this.selectedTag.tagPrice.startsWith('$') === true) {
           this.selectedTag.tagPrice = this.selectedTag.tagPrice.slice(1);
         }
         if (this.selectedTag.userEmail === this.username) {
@@ -119,5 +119,4 @@ export class TagDetailsPage implements OnInit {
   routeToSettings() {
     this.router.navigate(['/settings']);
   }
-
 }

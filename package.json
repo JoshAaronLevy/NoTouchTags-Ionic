@@ -9,6 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "android": "ionic cap sync && npx cap open android",
+    "ios": "ionic cap sync && npx cap open ios",
     "install:clean": "rm -rf package-lock.json && npm i"
   },
   "dependencies": {
