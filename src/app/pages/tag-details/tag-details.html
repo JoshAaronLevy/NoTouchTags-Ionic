@@ -34,6 +34,9 @@
     <ion-item lines="none" class="description">
       <p class="tag-description">{{ selectedTag.tagInfo }}</p>
     </ion-item>
+    <ion-item lines="none" class="description">
+      <ion-button (click)="viewTagUrl(selectedTag)" color="primary">View Details</ion-button>
+    </ion-item>
   </div>
 </ion-content>
 <ion-footer class="tab-footer">

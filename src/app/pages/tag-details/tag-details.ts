@@ -7,11 +7,15 @@ import { parseResults } from 'src/shared/parseResults';
 import { ToastController } from '@ionic/angular';
 import { getStoredUser } from 'src/shared/userHelper';
 import { storeTag } from 'src/shared/tagHelper';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-tag-details',
   templateUrl: './tag-details.html',
   styleUrls: ['./tag-details.scss'],
+  providers: [
+    InAppBrowser
+  ]
 })
 export class TagDetailsPage implements OnInit {
   selectedTagId: any;
@@ -29,9 +33,11 @@ export class TagDetailsPage implements OnInit {
   };
   username: any;
   editEnabled: boolean;
+  browser: any;
 
   constructor(
     public router: Router,
+    private iab: InAppBrowser,
     public toastController: ToastController
   ) {
     Parse.initialize(ParseKey.appId, ParseKey.javascript);
@@ -78,6 +84,10 @@ export class TagDetailsPage implements OnInit {
       this.presentTagErrorToast(error);
       return error;
     });
+  }
+
+  viewTagUrl(tag) {
+    const browser = this.iab.create(tag.tagUrl, '_self', { fullscreen: 'no' });
   }
 
   async presentTagErrorToast(error) {

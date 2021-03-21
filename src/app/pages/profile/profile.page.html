@@ -28,8 +28,8 @@
       </ion-label>
     </ion-item>
   </ion-list>
-  <ion-list *ngIf="isAgent">
-    <ion-item button routerLink="/create-tag" (click)="routeToCreateTag()">
+  <ion-list>
+    <ion-item button (click)="routeToCreateTag()">
       <ion-icon slot="start" name="duplicate-outline"></ion-icon>
       <ion-label>
         <h3>Add New NFC Tag</h3>

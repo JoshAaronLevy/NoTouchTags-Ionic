@@ -119,6 +119,30 @@ export class ProfilePage implements OnInit {
     await alert.present();
   }
 
+  async presentCreateTagConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Create Tag',
+      subHeader: 'NOTE: This feature is for creating a tag to showcase a product you are selling. Do you wish to continue?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Yes',
+          handler: () => {
+            localStorage.removeItem('previousRoute');
+            localStorage.setItem('previousRoute', 'settings');
+            localStorage.setItem('method', 'create');
+            this.router.navigate(['/create-tag']);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Select Scan Mode',
@@ -143,10 +167,14 @@ export class ProfilePage implements OnInit {
   }
 
   routeToCreateTag() {
-    localStorage.removeItem('previousRoute');
-    localStorage.setItem('previousRoute', 'settings');
-    localStorage.setItem('method', 'create');
-    this.router.navigate(['/create-tag']);
+    if (this.isAgent === true) {
+      localStorage.removeItem('previousRoute');
+      localStorage.setItem('previousRoute', 'settings');
+      localStorage.setItem('method', 'create');
+      this.router.navigate(['/create-tag']);
+    } else {
+      this.presentCreateTagConfirm();
+    }
   }
 
   routeToTags() {
