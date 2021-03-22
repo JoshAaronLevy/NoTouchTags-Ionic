@@ -131,26 +131,40 @@ export class CreateTagPage implements OnInit {
 
   async takePicture() {
     try {
-      const profilePicture = await Camera.getPhoto({
-        quality: 100,
-        allowEditing: true,
-        resultType: CameraResultType.Base64,
-        width: 800,
-        height: 800
-      });
-      profilePicture.format = 'jpeg';
-      this.picture = profilePicture.base64String;
-      console.log(profilePicture);
-      this.photoService.create(profilePicture);
+      // const profilePicture = await Camera.getPhoto({
+      //   quality: 100,
+      //   allowEditing: true,
+      //   resultType: CameraResultType.Base64,
+      //   width: 375,
+      //   height: 360
+      // });
+      // profilePicture.format = 'jpeg';
+      // this.picture = profilePicture.base64String;
+      // console.log(profilePicture);
+      // this.photoService.create(profilePicture);
+      this.photoService.addNewToGallery(this.tag.id);
     } catch (error) {
       return this.presentPhotoErrorToast(error);
     }
   }
 
   choosePhoto() {
-    this.chooser.getFile()
-      .then(file => console.log(file ? file.name : 'canceled'))
-      .catch((error: any) => console.error(error));
+    // this.chooser.getFile()
+    //   .then(file => {
+    //     console.log(file);
+    //   })
+    //   .catch((error: any) => {
+    //     this.presentLoadPhotoErrorToast();
+    //     console.error(error);
+    //   });
+    this.fileChooser.open()
+      .then(file => {
+        console.log(file);
+      })
+      .catch((error: any) => {
+        this.presentLoadPhotoErrorToast();
+        return error;
+      });
   }
 
   changeVisibility(val) {
@@ -226,6 +240,15 @@ export class CreateTagPage implements OnInit {
       position: 'top',
       color: 'danger',
       duration: 5000
+    });
+    toast.present();
+  }
+
+  async presentLoadPhotoErrorToast() {
+    const toast = await this.toastController.create({
+      message: 'ERROR: Unable to access photos.',
+      position: 'top',
+      color: 'danger'
     });
     toast.present();
   }

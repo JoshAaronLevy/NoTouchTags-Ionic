@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   Plugins,
   CameraResultType,
@@ -11,6 +11,7 @@ import {
 import { Platform } from '@ionic/angular';
 import { v4 as uuid } from 'uuid';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 const { Camera, Filesystem, Storage } = Plugins;
 
@@ -36,14 +37,15 @@ export class PhotoService {
   }
 
   create(params: any) {
-    return this.http.post(photoUrl, params).subscribe(res => {
-      console.log(res);
+    return this.http.post(photoUrl, params).subscribe(response => {
+      console.log(response);
+      return response;
     });
   }
 
   requestAccess() {
     Camera.requestPermissions().then((response) => {
-      console.log(response);
+      return response;
     });
   }
 
@@ -52,13 +54,16 @@ export class PhotoService {
     const capturedPhoto = await Camera.getPhoto({
       resultType: CameraResultType.Uri,
       source: CameraSource.Camera,
-      quality: 100
+      width: 375,
+      height: 360,
+      quality: 100,
+      saveToGallery: true
     });
     const savedImageFile = await this.savePicture(capturedPhoto, id);
     this.photos.unshift(savedImageFile);
 
     this.photos.unshift({
-      filepath: 'soon...',
+      filepath: '',
       webviewPath: capturedPhoto.webPath
     });
 
@@ -69,8 +74,9 @@ export class PhotoService {
   }
 
   async savePicture(cameraPhoto: CameraPhoto, id) {
-    const base64Data = await this.readAsBase64(cameraPhoto);
-    const fileName = id + '.jpg';
+    console.log(cameraPhoto);
+    const fileName = `Tag-${this.uniqueId}-1`;
+    const base64Data = await this.readAsBase64(cameraPhoto, fileName);
     const savedFile = await Filesystem.writeFile({
       path: fileName,
       data: base64Data,
@@ -82,32 +88,32 @@ export class PhotoService {
         webviewPath: Capacitor.convertFileSrc(savedFile.uri),
       };
     } else {
-      console.log(fileName);
       this.uploadParams = {
         filepath: fileName,
-        webviewPath: cameraPhoto.webPath
+        // webviewPath: cameraPhoto.webPath,
+        webviewPath: fileName
       };
       this.photo = cameraPhoto;
+      this.sendPostRequest();
       return this.uploadParams;
     }
   }
 
-  async readAsBase64(cameraPhoto: CameraPhoto) {
-    console.log('Read as base64');
+  async readAsBase64(cameraPhoto: CameraPhoto, fileName) {
     if (this.platform.is('hybrid')) {
       const file = await Filesystem.readFile({
         path: cameraPhoto.path
       });
       return file.data;
     } else {
-      const response = await fetch(cameraPhoto.webPath);
+      const response = await fetch(fileName);
+      console.log(response);
       const blob = await response.blob();
       return await this.convertBlobToBase64(blob) as string;
     }
   }
 
   convertBlobToBase64 = (blob: Blob) => new Promise((resolve, reject) => {
-    console.log('Convert blob to base64');
     const reader = new FileReader();
     reader.onerror = reject;
     reader.onload = () => {
@@ -117,11 +123,10 @@ export class PhotoService {
   })
 
   async loadSaved() {
-    console.log('Load saved');
     const photoList = await Storage.get({ key: this.PHOTO_STORAGE });
     this.photos = JSON.parse(photoList.value) || [];
     if (!this.platform.is('hybrid')) {
-      for (let photo of this.photos) {
+      for (const photo of this.photos) {
         const readFile = await Filesystem.readFile({
           path: photo.filepath,
           directory: FilesystemDirectory.Data
@@ -130,4 +135,48 @@ export class PhotoService {
       }
     }
   }
+
+  sendPostRequest() {
+    const fullFileName = `Tag-${this.uniqueId}-1`;
+    const url = 'https://photos.homecards.com/admin/uploads/rebeacons/';
+    // const headers = new HttpHeaders()
+    //   .set('Accept-Language', 'en;q=1.0')
+    //   .set('Content-Type', 'multipart/form-data; boundary=alamofire.boundary.b69f8d8214f5b481');
+    const body = {
+      fileName: fullFileName,
+      mimeType: 'image/jpeg'
+    };
+    return this.http
+      .post(url, body)
+      // tslint:disable-next-line: deprecation
+      .subscribe(res => {
+        console.log(res);
+      });
+  }
+
+  // photoFunc() {
+  //   PHOTOREF1: Optional('Tag-0B022FB5-B6D7-4E1D-924D-EC5BC13EEB1F-1.jpg')
+  //   success(request: $ curl - v \
+  //     -X POST \
+  //     -H 'Accept-Language: en;q=1.0' \
+  //     -H 'Content-Type: multipart/form-data; boundary=alamofire.boundary.b69f8d8214f5b481' \
+  //     -H 'User-Agent: NFCTagsApp/2.5 (com.hillsidesoftware.notouchtags; build:2.5; iOS 14.5.0) Alamofire/4.8.2' \
+  //     -H 'Accept-Encoding: gzip;q=1.0, compress;q=0.5' \
+  //     'https://photos.homecards.com/admin/uploads/rebeacons/', streamingFromDisk: false, streamFileURL: nil)
+  //   1.0
+  //   Succesfully uploaded
+  //   SUCCESS: {
+  //     fields = {
+  //     };
+  //     files = {
+  //       Photo =         {
+  //         mtime = '2021-03-21T21:40:10.600Z';
+  //         name = 'Tag-0B022FB5-B6D7-4E1D-924D-EC5BC13EEB1F-1.jpg';
+  //         path = '/home/rets/.mls-cache/rebeacons/Tag-0B022FB5-B6D7-4E1D-924D-EC5BC13EEB1F-1.jpg';
+  //         size = 148969;
+  //         type = 'image/jpeg';
+  //       };
+  //     };
+  //   }
+  // }
 }

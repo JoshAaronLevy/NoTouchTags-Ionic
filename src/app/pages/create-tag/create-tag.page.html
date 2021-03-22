@@ -9,14 +9,14 @@
 </ion-header>
 <ion-content>
   <form *ngIf="!loading" role="form" [formGroup]="tagEdit" (ngSubmit)="editTag()">
-    <ion-button *ngIf="method === 'create'" (click)="takePicture()" expand="block" color="primary">Add Photo
+    <ion-button *ngIf="method === 'create'" (click)="presentActionSheet()" expand="block" color="primary">Add Photo
     </ion-button>
     <ion-slides *ngIf="method === 'edit'" class="gallery" Sclass="ion-padding-top" pager="false">
       <ion-slide class="ion-margin-bottom">
         <ion-img [src]="tag.imageUrl"></ion-img>
       </ion-slide>
     </ion-slides>
-    <ion-button *ngIf="method === 'edit'" (click)="takePicture()" expand="block" color="primary">Change Photo
+    <ion-button *ngIf="method === 'edit'" (click)="presentActionSheet()" expand="block" color="primary">Change Photo
     </ion-button>
     <!-- <ion-card class="create-tag-placeholder">
       <ion-icon name="camera-outline"></ion-icon>
