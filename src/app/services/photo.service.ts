@@ -59,12 +59,12 @@ export class PhotoService {
       quality: 100,
       saveToGallery: true
     });
-    const savedImageFile = await this.savePicture(capturedPhoto, id);
+    const savedImageFile = await this.savePicture(capturedPhoto);
     this.photos.unshift(savedImageFile);
 
     this.photos.unshift({
       filepath: '',
-      webviewPath: capturedPhoto.webPath
+      webviewPath: `Tag-${this.uniqueId}-1.jpg`
     });
 
     Storage.set({
@@ -73,9 +73,8 @@ export class PhotoService {
     });
   }
 
-  async savePicture(cameraPhoto: CameraPhoto, id) {
-    console.log(cameraPhoto);
-    const fileName = `Tag-${this.uniqueId}-1`;
+  async savePicture(cameraPhoto: CameraPhoto) {
+    const fileName = `Tag-${this.uniqueId}-1.jpg`;
     const base64Data = await this.readAsBase64(cameraPhoto, fileName);
     const savedFile = await Filesystem.writeFile({
       path: fileName,
@@ -107,7 +106,6 @@ export class PhotoService {
       return file.data;
     } else {
       const response = await fetch(fileName);
-      console.log(response);
       const blob = await response.blob();
       return await this.convertBlobToBase64(blob) as string;
     }
@@ -137,46 +135,20 @@ export class PhotoService {
   }
 
   sendPostRequest() {
-    const fullFileName = `Tag-${this.uniqueId}-1`;
+    const fullFileName = `Tag-${this.uniqueId}-1.jpg`;
     const url = 'https://photos.homecards.com/admin/uploads/rebeacons/';
-    // const headers = new HttpHeaders()
-    //   .set('Accept-Language', 'en;q=1.0')
-    //   .set('Content-Type', 'multipart/form-data; boundary=alamofire.boundary.b69f8d8214f5b481');
+    const headers = new HttpHeaders()
+      .set('Accept-Language', 'en;q=1.0')
+      .set('Access-Control-Allow-Origin', '*')
+      .set('x-token', this.uniqueId);
     const body = {
       fileName: fullFileName,
       mimeType: 'image/jpeg'
     };
     return this.http
-      .post(url, body)
-      // tslint:disable-next-line: deprecation
+      .post(url, body, { headers })
       .subscribe(res => {
         console.log(res);
       });
   }
-
-  // photoFunc() {
-  //   PHOTOREF1: Optional('Tag-0B022FB5-B6D7-4E1D-924D-EC5BC13EEB1F-1.jpg')
-  //   success(request: $ curl - v \
-  //     -X POST \
-  //     -H 'Accept-Language: en;q=1.0' \
-  //     -H 'Content-Type: multipart/form-data; boundary=alamofire.boundary.b69f8d8214f5b481' \
-  //     -H 'User-Agent: NFCTagsApp/2.5 (com.hillsidesoftware.notouchtags; build:2.5; iOS 14.5.0) Alamofire/4.8.2' \
-  //     -H 'Accept-Encoding: gzip;q=1.0, compress;q=0.5' \
-  //     'https://photos.homecards.com/admin/uploads/rebeacons/', streamingFromDisk: false, streamFileURL: nil)
-  //   1.0
-  //   Succesfully uploaded
-  //   SUCCESS: {
-  //     fields = {
-  //     };
-  //     files = {
-  //       Photo =         {
-  //         mtime = '2021-03-21T21:40:10.600Z';
-  //         name = 'Tag-0B022FB5-B6D7-4E1D-924D-EC5BC13EEB1F-1.jpg';
-  //         path = '/home/rets/.mls-cache/rebeacons/Tag-0B022FB5-B6D7-4E1D-924D-EC5BC13EEB1F-1.jpg';
-  //         size = 148969;
-  //         type = 'image/jpeg';
-  //       };
-  //     };
-  //   }
-  // }
 }
