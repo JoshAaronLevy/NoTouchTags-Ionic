@@ -150,6 +150,8 @@ export class PhotoService {
       .post(url, body, { headers })
       .subscribe(res => {
         console.log(res);
+      }, err => {
+        console.log(err);
       });
   }
 }
