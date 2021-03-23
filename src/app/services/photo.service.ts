@@ -139,6 +139,7 @@ export class PhotoService {
     const url = 'https://photos.homecards.com/admin/uploads/rebeacons/';
     const headers = new HttpHeaders()
       .set('Accept-Language', 'en;q=1.0')
+      .set('Content-Type', 'image/jpeg')
       .set('Access-Control-Allow-Origin', '*')
       .set('x-token', this.uniqueId);
     const body = {
