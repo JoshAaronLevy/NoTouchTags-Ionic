@@ -59,21 +59,25 @@ export class PhotoService {
       quality: 100,
       saveToGallery: true
     });
+    console.log(capturedPhoto);
     const savedImageFile = await this.savePicture(capturedPhoto);
     this.photos.unshift(savedImageFile);
+    console.log(savedImageFile);
 
-    this.photos.unshift({
-      filepath: '',
-      webviewPath: `Tag-${this.uniqueId}-1.jpg`
-    });
+    // this.photos.unshift({
+    //   filepath: '',
+    //   webviewPath: capturedPhoto.webPath
+    // });
+    // console.log(this.photos);
 
-    Storage.set({
-      key: this.PHOTO_STORAGE,
-      value: JSON.stringify(this.photos)
-    });
+    // Storage.set({
+    //   key: this.PHOTO_STORAGE,
+    //   value: JSON.stringify(this.photos)
+    // });
   }
 
   async savePicture(cameraPhoto: CameraPhoto) {
+    console.log(cameraPhoto);
     const fileName = `Tag-${this.uniqueId}-1.jpg`;
     const base64Data = await this.readAsBase64(cameraPhoto, fileName);
     const savedFile = await Filesystem.writeFile({
@@ -81,6 +85,7 @@ export class PhotoService {
       data: base64Data,
       directory: FilesystemDirectory.Data
     });
+    console.log(savedFile);
     if (this.platform.is('hybrid')) {
       return {
         filepath: savedFile.uri,
@@ -93,8 +98,9 @@ export class PhotoService {
         webviewPath: fileName
       };
       this.photo = cameraPhoto;
-      this.sendPostRequest();
-      return this.uploadParams;
+      console.log(this.photo);
+      console.log(this.uploadParams);
+      return this.sendPostRequest();
     }
   }
 
@@ -136,18 +142,15 @@ export class PhotoService {
 
   sendPostRequest() {
     const fullFileName = `Tag-${this.uniqueId}-1.jpg`;
-    const url = 'https://photos.homecards.com/admin/uploads/rebeacons/';
+    const url = 'https://photos.homecards.com/admin/uploads/app/';
     const headers = new HttpHeaders()
-      .set('Accept-Language', 'en;q=1.0')
-      .set('Content-Type', 'image/jpeg')
-      .set('Access-Control-Allow-Origin', '*')
       .set('x-token', this.uniqueId);
     const body = {
       fileName: fullFileName,
-      mimeType: 'image/jpeg'
+      mimeType: 'multipart/form-data'
     };
     return this.http
-      .post(url, body, { headers })
+      .post(url, { file: body }, { headers })
       .subscribe(res => {
         console.log(res);
       }, err => {

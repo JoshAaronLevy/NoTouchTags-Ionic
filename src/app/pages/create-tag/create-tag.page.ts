@@ -149,22 +149,22 @@ export class CreateTagPage implements OnInit {
   }
 
   choosePhoto() {
-    // this.chooser.getFile()
-    //   .then(file => {
-    //     console.log(file);
-    //   })
-    //   .catch((error: any) => {
-    //     this.presentLoadPhotoErrorToast();
-    //     console.error(error);
-    //   });
-    this.fileChooser.open()
+    this.chooser.getFile()
       .then(file => {
         console.log(file);
       })
       .catch((error: any) => {
         this.presentLoadPhotoErrorToast();
-        return error;
+        console.error(error);
       });
+    // this.fileChooser.open()
+    //   .then(file => {
+    //     console.log(file);
+    //   })
+    //   .catch((error: any) => {
+    //     this.presentLoadPhotoErrorToast();
+    //     return error;
+    //   });
   }
 
   changeVisibility(val) {
