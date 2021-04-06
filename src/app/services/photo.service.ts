@@ -24,24 +24,28 @@ export class PhotoService {
   PHOTO_STORAGE: string = 'photos';
   platform: Platform;
   uploadParams: { filepath: string; webviewPath: string };
+
   constructor(platform: Platform, private http: HttpClient) {
     this.platform = platform;
   }
+
   create(params: any) {
     return this.http.post(photoUrl, params).subscribe((response) => {
       console.log(response);
       return response;
     });
   }
+
   requestAccess() {
     Camera.requestPermissions().then((response) => {
       return response;
     });
   }
+
   async addNewToGallery(id) {
     this.uniqueId = id;
     const capturedPhoto = await Camera.getPhoto({
-      resultType: CameraResultType.Uri,
+      resultType: CameraResultType.DataUrl,
       source: CameraSource.Camera,
       width: 375,
       height: 360,
@@ -52,16 +56,8 @@ export class PhotoService {
     const savedImageFile = await this.savePicture(capturedPhoto);
     this.photos.unshift(savedImageFile);
     console.log(savedImageFile);
-    // this.photos.unshift({
-    //   filepath: '',
-    //   webviewPath: capturedPhoto.webPath
-    // });
-    // console.log(this.photos);
-    // Storage.set({
-    //   key: this.PHOTO_STORAGE,
-    //   value: JSON.stringify(this.photos)
-    // });
   }
+
   async readAsBase64(cameraPhoto: CameraPhoto, fileName) {
     if (this.platform.is('hybrid')) {
       const file = await Filesystem.readFile({
@@ -74,6 +70,7 @@ export class PhotoService {
       return (await this.convertBlobToBase64(blob)) as string;
     }
   }
+
   async loadSaved() {
     const photoList = await Storage.get({ key: this.PHOTO_STORAGE });
     this.photos = JSON.parse(photoList.value) || [];
@@ -87,10 +84,13 @@ export class PhotoService {
       }
     }
   }
+
   async savePicture(cameraPhoto: CameraPhoto) {
+    console.log(cameraPhoto);
     const file = this.dataUriToFile(cameraPhoto.dataUrl, `Tag-${this.uniqueId}-1.jpg`)
     return await this.sendPostRequest(file);
   }
+
   sendPostRequest(file: File) {
     const url = 'https://photos.homecards.com/admin/uploads/app/';
     const headers = new HttpHeaders({
@@ -107,7 +107,10 @@ export class PhotoService {
       }
     );
   }
+
   dataUriToFile(dataUri: string, filename: string) {
+    console.log(dataUri);
+    console.log(filename);
     const [mimeInfo, base64] = dataUri.split(',');
     const mime = mimeInfo.match(/:(.*?);/)[1];
     const bstr = atob(base64);
@@ -118,6 +121,7 @@ export class PhotoService {
     }
     return new File([bits], filename, { type: mime });
   }
+
   convertBlobToBase64 = (blob: Blob) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
