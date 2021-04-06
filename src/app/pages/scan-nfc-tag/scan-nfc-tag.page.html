@@ -7,6 +7,18 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true" class="ion-padding">
+  <div class="no-tags-container">
+    <h2 *ngIf="scanning" class="scanning-header">Scanning</h2>
+    <ion-progress-bar *ngIf="scanning" type="indeterminate"></ion-progress-bar>
+    <ion-button *ngIf="scanning" (click)="stopScan()" class="scanning-button ion-margin-top ion-margin-bottom"
+      size="large" expand="block" shape="round" color="danger">
+      Cancel
+    </ion-button>
+    <ion-button *ngIf="!scanning" (click)="startScan()" class="scanning-button ion-margin-top ion-margin-bottom"
+      size="large" expand="block" shape="round" color="primary">
+      Scan
+    </ion-button>
+  </div>
 </ion-content>
 <ion-footer class="tab-footer">
   <ion-tabs>
